@@ -1,8 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
-import style from './App.module.scss';
+import logo from '../../assets/logo.svg';
+import style from './style.module.scss';
 
-function App() {
+function HomePage() {
     return (
         <div className={style.app}>
             <header className={style.appHeader}>
@@ -23,4 +23,4 @@ function App() {
     );
 }
 
-export default App;
+export default HomePage;
