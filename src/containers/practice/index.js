@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import style from './style.module.scss';
 
@@ -12,9 +11,5 @@ class PracticePage extends React.Component {
         );
     }
 }
-
-PracticePage.propTypes = {};
-
-PracticePage.defaultProps = {};
 
 export default PracticePage;

@@ -1,35 +1,87 @@
 @import 'styles/helpers';
 
-.app {
-  text-align: center;
+.homePage {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: $background-color;
 }
 
-.appLogo {
-  animation: app-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.header {
+  padding-left: 30px;
+  font-size: 20px;
 }
 
-.appHeader {
-  background-color: $primary-color;
-  min-height: 100vh;
+.content {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  width: 100%;
+
+  >* {
+    margin-bottom: 15px;
+  }
+}
+
+.button {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 22px;
+  text-align: center;
   color: white;
+  height: 60px;
+  padding: 0;
 }
 
-.appLink {
-  color: $accent-color;
+.kanaTableButton {
+  composes: button;
+  background: #8589F3;
 }
 
-@keyframes app-logo-spin {
-  from {
-    transform: rotate(0deg);
+.practiceButton {
+  composes: button;
+  background: #65A3F3;
+}
+
+.optionButtons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  > *:nth-child(1) {
+    margin-right: 10px;
   }
-  to {
-    transform: rotate(360deg);
+
+  > *:nth-child(2) {
+    margin-left: 10px;
   }
+}
+
+.optionButton {
+  flex: 1;
+
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 22px;
+  text-align: center;
+  color: $primary-text-color;
+  height: 60px;
+  background: #DBE0E3;
 }
