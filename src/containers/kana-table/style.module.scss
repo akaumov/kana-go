@@ -1,0 +1,16 @@
+@import 'styles/helpers';
+
+.kanaTablePage {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

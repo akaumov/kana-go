@@ -1,0 +1,27 @@
+@import 'styles/helpers';
+
+.item {
+  position: relative;
+  text-align: center;
+}
+
+.mainSymbol {
+  font-size: 30px;
+}
+
+.info {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.secondarySymbol {
+}
+
+.romaji {
+  display: inline-block;
+  text-transform: uppercase;
+  margin-right: 5px;
+}

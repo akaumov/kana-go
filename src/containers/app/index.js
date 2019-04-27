@@ -3,6 +3,7 @@ import { HashRouter as Router, Route, Switch } from "react-router-dom";
 
 import HomePage from "../home";
 import PracticePage from "../practice";
+import KanaTablePage from "../kana-table";
 
 class App extends React.Component {
     render() {
@@ -13,6 +14,11 @@ class App extends React.Component {
                         exact
                         path='/'
                         component={HomePage}
+                    />
+                    <Route
+                        exact
+                        path='/kana-table'
+                        component={KanaTablePage}
                     />
                     <Route
                         exact

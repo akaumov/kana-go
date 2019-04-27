@@ -1,0 +1,18 @@
+@import 'styles/helpers';
+
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  min-height: 45px;
+  height: 45px;
+  background: #F3F3F3;
+  padding-left: 40px;
+  padding-right: 25px;
+  align-items: center;
+}
+
+.title {
+  flex: 1;
+  font-size: 20px;
+}
