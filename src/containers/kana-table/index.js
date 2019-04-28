@@ -37,6 +37,14 @@ class KanaTablePage extends React.Component {
                     title={'Kana table'}
                 />
                 <div className={style.content}>
+                    <ol className={style.tableHeader}>
+                        <li>
+                            1.Hiragana table
+                        </li>
+                        <li>
+                           2.Katakana table
+                        </li>
+                    </ol>
                     <Table
                         items={HIRAGANA_TABLE}
                     />
