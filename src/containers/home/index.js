@@ -2,6 +2,7 @@ import React from 'react';
 import {withRouter} from "react-router-dom";
 
 import style from './style.module.scss';
+import AnimatedBackground from "./animated-background";
 
 class HomePage extends React.Component {
     _handleOpenKanaTable = () => {
@@ -15,16 +16,14 @@ class HomePage extends React.Component {
     render() {
         return (
             <div className={style.homePage}>
-                <div className={style.header}>
-                    <h1>Kana (仮名) - Home</h1>
-                </div>
                 <div className={style.content}>
                     <div className={style.menu}>
+                        <h1 className={style.title}>Kana-Go (仮名)</h1>
                         <button
                             className={style.kanaTableButton}
                             onClick={this._handleOpenKanaTable}
                         >
-                            Kana table
+                            Alphabet
                         </button>
                         <button
                             className={style.practiceButton}
@@ -42,6 +41,7 @@ class HomePage extends React.Component {
                         </div>
                     </div>
                 </div>
+                <AnimatedBackground />
             </div>
         );
     }
