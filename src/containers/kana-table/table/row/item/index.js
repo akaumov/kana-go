@@ -10,7 +10,7 @@ class Item extends React.Component {
         let secondarySymbol = katakana;
 
         return (
-            <td className={style.item}>
+            <div className={style.item}>
                 <div className={style.mainSymbol}>
                     {mainSymbol}
                 </div>
@@ -22,7 +22,7 @@ class Item extends React.Component {
                         {secondarySymbol}
                     </div>
                 </div>
-            </td>
+            </div>
         );
     }
 }

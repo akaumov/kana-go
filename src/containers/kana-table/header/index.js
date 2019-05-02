@@ -11,8 +11,6 @@ class Header extends React.Component {
     };
 
     render() {
-        const {title} = this.props;
-
         return (
             <nav className={style.header}>
                 <button

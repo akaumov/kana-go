@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import style from './style.module.scss';
 
@@ -23,9 +22,5 @@ class AnimatedBackground extends React.Component {
         );
     }
 }
-
-AnimatedBackground.propTypes = {};
-
-AnimatedBackground.defaultProps = {};
 
 export default AnimatedBackground;

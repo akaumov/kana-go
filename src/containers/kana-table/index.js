@@ -4,8 +4,10 @@ import Header from './header';
 
 import kana from 'japanese-json';
 
-import style from './style.module.scss';
 import Table from "./table";
+import CharacterCard from "./character-card";
+
+import style from './style.module.scss';
 
 const HIRAGANA_TABLE = ['-', 'k', 's', 't', 'n', 'h', 'm', 'y', 'r', 'w'].map(firstSymbol => {
     const setOfSymbols = kana[firstSymbol];
@@ -28,6 +30,10 @@ const HIRAGANA_TABLE = ['-', 'k', 's', 't', 'n', 'h', 'm', 'y', 'r', 'w'].map(fi
 
 class KanaTablePage extends React.Component {
 
+    _handleClickItem = (itemId) => {
+        this.props.history.push('/kana-table/' + itemId);
+    };
+
     render() {
         console.log('KANA', kana)
         console.log('KANA', HIRAGANA_TABLE)
@@ -42,12 +48,14 @@ class KanaTablePage extends React.Component {
                             1.Hiragana table
                         </li>
                         <li>
-                           2.Katakana table
+                            2.Katakana table
                         </li>
                     </ol>
                     <Table
                         items={HIRAGANA_TABLE}
+                        onClickItem={this._handleClickItem}
                     />
+                    <CharacterCard />
                 </div>
             </div>
         );

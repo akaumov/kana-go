@@ -6,7 +6,7 @@ import style from './style.module.scss';
 
 class Table extends React.Component {
     render() {
-        const {items} = this.props;
+        const {items, onClickItem} = this.props;
         return (
             <table className={style.table}>
                 <tbody>
@@ -15,6 +15,7 @@ class Table extends React.Component {
                         <Row
                             key={index}
                             items={row}
+                            onClickItem={onClickItem}
                         />
                     ))
                 }
@@ -24,7 +25,10 @@ class Table extends React.Component {
     }
 }
 
-Table.propTypes = {};
+Table.propTypes = {
+    items: PropTypes.array.isRequired,
+    onClickItem: PropTypes.func.isRequired
+};
 
 Table.defaultProps = {};
 

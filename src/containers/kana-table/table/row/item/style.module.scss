@@ -3,6 +3,9 @@
 .item {
   position: relative;
   text-align: center;
+
+  cursor: pointer;
+  user-select: none;
 }
 
 .mainSymbol {

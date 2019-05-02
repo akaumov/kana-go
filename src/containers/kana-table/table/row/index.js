@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import Item from "./item";
 
-import style from './style.module.scss';
-
 class Row extends React.Component {
     render() {
         const {items} = this.props;
@@ -12,12 +10,13 @@ class Row extends React.Component {
             <tr>
                 {
                     items.map((item, index) => (
-                        <Item
-                            key={index}
-                            romaji={item.romaji}
-                            katakana={item.katakana}
-                            hiragana={item.hiragana}
-                        />
+                        <td key={index}>
+                            <Item
+                                romaji={item.romaji}
+                                katakana={item.katakana}
+                                hiragana={item.hiragana}
+                            />
+                        </td>
                     ))
                 }
             </tr>

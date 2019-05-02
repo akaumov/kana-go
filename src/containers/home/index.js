@@ -33,7 +33,7 @@ class HomePage extends React.Component {
                         </button>
                         <div className={style.optionButtons}>
                             <button className={style.optionButton}>
-                                More...
+                                Info
                             </button>
                             <button className={style.optionButton}>
                                 Lists
