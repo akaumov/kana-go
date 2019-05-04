@@ -1,4 +1,5 @@
 import React from 'react';
+import {withRouter} from "react-router-dom";
 
 import Header from './header';
 
@@ -21,22 +22,70 @@ const HIRAGANA_TABLE = ['-', 'k', 's', 't', 'n', 'h', 'm', 'y', 'r', 'w'].map(fi
 
 
         return {
+            id: symbolData.Seion.Romaji,
             hiragana: symbolData.Seion.Hiragana,
             katakana: symbolData.Seion.Katakana,
-            romaji: symbolData.Seion.Romaji
+            romaji: symbolData.Seion.Romaji,
         }
     })
 });
 
 class KanaTablePage extends React.Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            openedCharacter: this._getOpenedCharacter(props)
+        };
+    }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        if (nextProps.match !== this.props.match) {
+            this.setState({
+                openedCharacter: this._getOpenedCharacter(nextProps)
+            });
+        }
+    }
+
+    _getOpenedCharacter = (props) => {
+        const {match} = props;
+        const openedCharacterId = match && match.params && match.params.characterId;
+
+        console.log('match', match)
+        console.log('openedCharacterId', openedCharacterId)
+        if (!openedCharacterId) {
+            return null;
+        }
+
+        console.log('bbb')
+
+        let openedCharacter;
+        HIRAGANA_TABLE.some(row => {
+            return row.some(item => {
+                if (item => item.id === openedCharacterId) {
+                    openedCharacter = item;
+                }
+
+                return openedCharacter;
+            });
+
+            return openedCharacter;
+        });
+
+        return openedCharacter;
+    };
+
     _handleClickItem = (itemId) => {
         this.props.history.push('/kana-table/' + itemId);
     };
 
+    _handleCharacterCardClosed = () => {
+        this.props.history.replace('/kana-table');
+    };
+
     render() {
-        console.log('KANA', kana)
-        console.log('KANA', HIRAGANA_TABLE)
+        const {openedCharacter} = this.state;
         return (
             <div className={style.kanaTablePage}>
                 <Header
@@ -55,11 +104,17 @@ class KanaTablePage extends React.Component {
                         items={HIRAGANA_TABLE}
                         onClickItem={this._handleClickItem}
                     />
-                    <CharacterCard />
+                    {
+                        openedCharacter &&
+                        <CharacterCard
+                            character={openedCharacter}
+                            onClosed={this._handleCharacterCardClosed}
+                        />
+                    }
                 </div>
             </div>
         );
     }
 }
 
-export default KanaTablePage;
+export default withRouter(KanaTablePage);

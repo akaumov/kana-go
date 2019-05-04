@@ -4,6 +4,11 @@ import PropTypes from 'prop-types';
 import Item from "./item";
 
 class Row extends React.Component {
+    _handleClickItem = (itemId) => (e) => {
+        e.stopPropagation();
+        this.props.onClickItem(itemId);
+    };
+
     render() {
         const {items} = this.props;
         return (
@@ -15,6 +20,7 @@ class Row extends React.Component {
                                 romaji={item.romaji}
                                 katakana={item.katakana}
                                 hiragana={item.hiragana}
+                                onClick={this._handleClickItem(item.id)}
                             />
                         </td>
                     ))
@@ -25,7 +31,8 @@ class Row extends React.Component {
 }
 
 Row.propTypes = {
-    items: PropTypes.array.isRequired
+    items: PropTypes.array.isRequired,
+    onClickItem: PropTypes.func.isRequired
 };
 
 Row.defaultProps = {};

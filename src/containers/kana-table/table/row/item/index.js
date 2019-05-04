@@ -5,12 +5,15 @@ import style from './style.module.scss';
 
 class Item extends React.Component {
     render() {
-        const {romaji, katakana, hiragana} = this.props;
+        const {romaji, katakana, hiragana, onClick} = this.props;
         let mainSymbol = hiragana;
         let secondarySymbol = katakana;
 
         return (
-            <div className={style.item}>
+            <div
+                className={style.item}
+                onClick={onClick}
+            >
                 <div className={style.mainSymbol}>
                     {mainSymbol}
                 </div>
@@ -31,6 +34,7 @@ Item.propTypes = {
     romaji: PropTypes.string,
     katakana: PropTypes.string,
     hiragana: PropTypes.string,
+    onClick: PropTypes.func.isRequired
 };
 
 Item.defaultProps = {};

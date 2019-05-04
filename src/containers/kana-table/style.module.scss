@@ -17,11 +17,11 @@
 }
 
 .tableHeader {
-  text-align: left;
-  font-size: 30px;
-
   display: flex;
   flex-direction: row;
+
+  text-align: left;
+  font-size: 30px;
 
   >li {
     list-style: none;
