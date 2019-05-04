@@ -5,12 +5,14 @@ import Modal from "../../../components/modal";
 import style from './style.module.scss';
 
 import closeIcon from '../../../assets/icons/_ionicons_svg_md-close.svg';
-import arrowIcon from '../../../assets/icons/_ionicons_svg_ios-arrow-back.svg';
+import arrowIcon from '../../../assets/icons/_ionicons_svg_ios-arrow-round-forward.svg';
 
 class CharacterCard extends React.Component {
     render() {
         const {character, onClosed} = this.props;
         const mainSymbol = character.katakana;
+        const secondSymbol = character.hiragana;
+
         return (
             <Modal>
                 <div className={style.dialog}>
@@ -32,8 +34,14 @@ class CharacterCard extends React.Component {
                         </div>
                         <div className={style.bottomInfo}>
                             <div className={style.oneToOne}>
-                                <img src={arrowIcon} />
+                                <span>Katakana</span>
+                                <i className="ion ion-ios-arrow-round-forward"/>
+                                {secondSymbol}
                             </div>
+
+                            <button className={style.playSoundButton}>
+                                <i className="ion ion-ios-volume-high"/>
+                            </button>
                         </div>
                     </div>
                 </div>
