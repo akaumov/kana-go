@@ -1,17 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Modal from "../../../components/modal";
 
 import style from './style.module.scss';
 
 import closeIcon from '../../../assets/icons/_ionicons_svg_md-close.svg';
-import arrowIcon from '../../../assets/icons/_ionicons_svg_ios-arrow-round-forward.svg';
 
 class CharacterCard extends React.Component {
     render() {
-        const {character, onClosed} = this.props;
-        const mainSymbol = character.katakana;
-        const secondSymbol = character.hiragana;
+        const {characterType, character, onClosed} = this.props;
+        const {hiragana, katakana, romaji} = character;
+
+        let mainSymbol = characterType === 'hiragana' ? hiragana : katakana;
+        let secondarySymbol = characterType === 'hiragana' ? katakana : hiragana;
+
+        const characterTypeText = characterType === 'hiragana' ? 'Hiragana' : 'Katakana';
+        const secondaryCharacterTypeText = characterType === 'hiragana' ? 'Katakana' : 'Hiragana';
 
         return (
             <Modal>
@@ -30,13 +35,13 @@ class CharacterCard extends React.Component {
                             {character.romaji}
                         </div>
                         <div className={style.characterType}>
-                            KATAKANA
+                            {characterTypeText}
                         </div>
                         <div className={style.bottomInfo}>
                             <div className={style.oneToOne}>
-                                <span>Katakana</span>
+                                <span>{secondaryCharacterTypeText}</span>
                                 <i className="ion ion-ios-arrow-round-forward"/>
-                                {secondSymbol}
+                                {secondarySymbol}
                             </div>
 
                             <button className={style.playSoundButton}>
@@ -49,5 +54,11 @@ class CharacterCard extends React.Component {
         );
     }
 }
+
+CharacterCard.propTypes = {
+    characterType: PropTypes.oneOf(['hiragana', 'katakana']),
+    character: PropTypes.any,
+    onClosed: PropTypes.func.isRequired
+};
 
 export default CharacterCard;

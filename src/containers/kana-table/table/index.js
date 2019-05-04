@@ -6,7 +6,7 @@ import style from './style.module.scss';
 
 class Table extends React.Component {
     render() {
-        const {items, onClickItem} = this.props;
+        const {items, onClickItem, characterType} = this.props;
         return (
             <table className={style.table}>
                 <tbody>
@@ -14,6 +14,7 @@ class Table extends React.Component {
                     items.map((row, index) => (
                         <Row
                             key={index}
+                            characterType={characterType}
                             items={row}
                             onClickItem={onClickItem}
                         />
@@ -26,6 +27,7 @@ class Table extends React.Component {
 }
 
 Table.propTypes = {
+    characterType: PropTypes.oneOf(['hiragana', 'katakana']),
     items: PropTypes.array.isRequired,
     onClickItem: PropTypes.func.isRequired
 };

@@ -10,13 +10,14 @@ class Row extends React.Component {
     };
 
     render() {
-        const {items} = this.props;
+        const {characterType, items} = this.props;
         return (
             <tr>
                 {
                     items.map((item, index) => (
                         <td key={index}>
                             <Item
+                                characterType={characterType}
                                 romaji={item.romaji}
                                 katakana={item.katakana}
                                 hiragana={item.hiragana}
@@ -31,8 +32,9 @@ class Row extends React.Component {
 }
 
 Row.propTypes = {
+    characterType: PropTypes.oneOf(['hiragana', 'katakana']),
     items: PropTypes.array.isRequired,
-    onClickItem: PropTypes.func.isRequired
+    onClickItem: PropTypes.func.isRequired,
 };
 
 Row.defaultProps = {};

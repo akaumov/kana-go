@@ -1,16 +1,16 @@
 import React from 'react';
 import {withRouter} from "react-router-dom";
 
-import Header from './header';
-
 import kana from 'japanese-json';
 
+import Header from './header';
 import Table from "./table";
 import CharacterCard from "./character-card";
+import CharacterTypeSwitcher from "./character-type-switcher";
 
 import style from './style.module.scss';
 
-const HIRAGANA_TABLE = ['-', 'k', 's', 't', 'n', 'h', 'm', 'y', 'r', 'w'].map(firstSymbol => {
+const KANA_TABLE = ['-', 'k', 's', 't', 'n', 'h', 'm', 'y', 'r', 'w'].map(firstSymbol => {
     const setOfSymbols = kana[firstSymbol];
 
     return ['a', 'i', 'u', 'e', 'o'].map(secondSymbol => {
@@ -32,81 +32,44 @@ const HIRAGANA_TABLE = ['-', 'k', 's', 't', 'n', 'h', 'm', 'y', 'r', 'w'].map(fi
 
 class KanaTablePage extends React.Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            openedCharacter: this._getOpenedCharacter(props)
-        };
-    }
-
-    componentWillReceiveProps(nextProps, nextContext) {
-        if (nextProps.match !== this.props.match) {
-            this.setState({
-                openedCharacter: this._getOpenedCharacter(nextProps)
-            });
-        }
-    }
-
-    _getOpenedCharacter = (props) => {
-        const {match} = props;
-        const openedCharacterId = match && match.params && match.params.characterId;
-
-        console.log('match', match)
-        console.log('openedCharacterId', openedCharacterId)
-        if (!openedCharacterId) {
-            return null;
-        }
-
-        console.log('bbb')
-
-        let openedCharacter;
-        HIRAGANA_TABLE.some(row => {
-            return row.some(item => {
-                if (item => item.id === openedCharacterId) {
-                    openedCharacter = item;
-                }
-
-                return openedCharacter;
-            });
-
-            return openedCharacter;
-        });
-
-        return openedCharacter;
-    };
-
     _handleClickItem = (itemId) => {
-        this.props.history.push('/kana-table/' + itemId);
+        const {history, characterType} = this.props;
+        history.push(`/kana-table/${characterType}/${itemId}`);
     };
 
     _handleCharacterCardClosed = () => {
-        this.props.history.replace('/kana-table');
+        const {characterType, history} = this.props;
+        history.replace(`/kana-table/${characterType}`);
+    };
+
+    _handleChangeCharacterType = (characterType) => {
+        const {history} = this.props;
+        history.replace(`/kana-table/${characterType}`);
     };
 
     render() {
-        const {openedCharacter} = this.state;
+        const {openedCharacter, characterType} = this.props;
         return (
             <div className={style.kanaTablePage}>
                 <Header
                     title={'Kana table'}
                 />
                 <div className={style.content}>
-                    <ol className={style.tableHeader}>
-                        <li>
-                            1.Hiragana table
-                        </li>
-                        <li>
-                            2.Katakana table
-                        </li>
-                    </ol>
+                    <div className={style.tableHeader}>
+                        <CharacterTypeSwitcher
+                            activeTypeId={characterType}
+                            onSelect={this._handleChangeCharacterType}
+                        />
+                    </div>
                     <Table
-                        items={HIRAGANA_TABLE}
+                        characterType={characterType}
+                        items={KANA_TABLE}
                         onClickItem={this._handleClickItem}
                     />
                     {
                         openedCharacter &&
                         <CharacterCard
+                            characterType={characterType}
                             character={openedCharacter}
                             onClosed={this._handleCharacterCardClosed}
                         />
@@ -117,4 +80,33 @@ class KanaTablePage extends React.Component {
     }
 }
 
-export default withRouter(KanaTablePage);
+const mapRouterToProps = (KanaTablePage) => (props) => {
+    const {match} = props;
+    const characterType = match && match.params && match.params.characterType;
+    const openedCharacterId = match && match.params && match.params.characterId;
+    let openedCharacter = null;
+
+    if (openedCharacterId) {
+        KANA_TABLE.some(rowItems => {
+            return rowItems.some(item => {
+                if (item.id !== openedCharacterId) {
+                    return false;
+                }
+
+                openedCharacter = item;
+                return true;
+            });
+        });
+    }
+
+    return (
+        <KanaTablePage
+            {...props}
+            characterType={characterType}
+            openedCharacterId={openedCharacterId}
+            openedCharacter={openedCharacter}
+        />
+    );
+};
+
+export default withRouter(mapRouterToProps(KanaTablePage));

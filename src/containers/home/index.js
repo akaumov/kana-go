@@ -6,7 +6,7 @@ import AnimatedBackground from "./animated-background";
 
 class HomePage extends React.Component {
     _handleOpenKanaTable = () => {
-        this.props.history.push('/kana-table');
+        this.props.history.push('/kana-table/hiragana');
     };
 
     _handleOpenPractice = () => {

@@ -1,0 +1,25 @@
+@import 'styles/helpers';
+
+.characterTypeSwitcher {
+  display: flex;
+  flex-direction: row;
+}
+
+.item {
+  list-style: none;
+  display: inline-block;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 20px;
+  text-align: center;
+  padding-bottom: 5px;
+
+  cursor: pointer;
+  user-select: none;
+}
+
+.activeItem {
+  composes: item;
+  border-bottom: 2px solid $accent-color;
+  color: $accent-color;
+}

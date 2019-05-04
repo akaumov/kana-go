@@ -17,12 +17,12 @@ class App extends React.Component {
                     />
                     <Route
                         exact
-                        path='/kana-table'
+                        path={'/kana-table/:characterType/:characterId'}
                         component={KanaTablePage}
                     />
                     <Route
                         exact
-                        path='/kana-table/:characterId'
+                        path={'/kana-table/:characterType'}
                         component={KanaTablePage}
                     />
                     <Route

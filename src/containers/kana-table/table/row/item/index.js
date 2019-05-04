@@ -5,9 +5,23 @@ import style from './style.module.scss';
 
 class Item extends React.Component {
     render() {
-        const {romaji, katakana, hiragana, onClick} = this.props;
-        let mainSymbol = hiragana;
-        let secondarySymbol = katakana;
+        const {
+            characterType,
+            romaji,
+            katakana,
+            hiragana,
+            onClick
+        } = this.props;
+        let mainSymbol = characterType === 'hiragana' ? hiragana : katakana;
+        let secondarySymbol = characterType === 'hiragana' ? katakana : hiragana;
+
+        if (!romaji) {
+            return (
+                <div className={style.placeholder}/>
+            );
+        }
+
+        const romajiText = (characterType === 'hiragana') ? romaji.toLowerCase() : romaji.toUpperCase();
 
         return (
             <div
@@ -19,7 +33,7 @@ class Item extends React.Component {
                 </div>
                 <div className={style.info}>
                     <div className={style.romaji}>
-                        {romaji}
+                        {romajiText}
                     </div>
                     <div className={style.secondarySymbol}>
                         {secondarySymbol}
@@ -31,6 +45,7 @@ class Item extends React.Component {
 }
 
 Item.propTypes = {
+    characterType: PropTypes.oneOf(['hiragana', 'katakana']),
     romaji: PropTypes.string,
     katakana: PropTypes.string,
     hiragana: PropTypes.string,
