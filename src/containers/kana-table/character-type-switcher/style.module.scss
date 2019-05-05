@@ -1,8 +1,35 @@
 @import 'styles/helpers';
 
+$item-width: 100px;
+
 .characterTypeSwitcher {
   display: flex;
   flex-direction: row;
+  position: relative;
+  padding: 0;
+
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: $item-width;
+    background: $accent-color;
+    transition: left 300ms ease-in-out;
+  }
+
+  &[data-active-item-index="0"] {
+    &:after {
+      left: (0 * $item-width);
+    }
+  }
+
+  &[data-active-item-index="1"] {
+    &:after {
+      left: (1 * $item-width);
+    }
+  }
 }
 
 .item {
@@ -16,10 +43,12 @@
 
   cursor: pointer;
   user-select: none;
+
+  width: 100px;
 }
 
 .activeItem {
   composes: item;
-  border-bottom: 2px solid $accent-color;
+  //border-bottom: 2px solid $accent-color;
   color: $accent-color;
 }

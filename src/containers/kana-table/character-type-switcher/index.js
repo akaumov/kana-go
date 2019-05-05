@@ -22,7 +22,10 @@ class CharacterTypeSwitcher extends React.Component {
     render() {
         const {activeTypeId} = this.props;
         return (
-            <ul className={style.characterTypeSwitcher}>
+            <ul
+                className={style.characterTypeSwitcher}
+                data-active-item-index={TYPES.findIndex(item => item.id === activeTypeId)}
+            >
                 {
                     TYPES.map(item => (
                         <li
