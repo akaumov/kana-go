@@ -1,9 +1,10 @@
 import React from 'react';
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import {HashRouter as Router, Route, Switch} from "react-router-dom";
 
 import HomePage from "../home";
 import PracticePage from "../practice";
 import KanaTablePage from "../kana-table";
+import NotFoundPage from "../404";
 
 class App extends React.Component {
     render() {
@@ -30,6 +31,7 @@ class App extends React.Component {
                         path='/practice'
                         component={PracticePage}
                     />
+                    <Route component={NotFoundPage}/>
                 </Switch>
             </Router>
         );
