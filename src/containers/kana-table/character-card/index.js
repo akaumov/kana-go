@@ -25,7 +25,7 @@ class CharacterCard extends React.Component {
                         className={style.closeButton}
                         onClick={onClosed}
                     >
-                        <img src={closeIcon}/>
+                        <i className="ion ion-ios-close" />
                     </button>
                     <div className={style.content}>
                         <div className={style.mainSymbol}>
