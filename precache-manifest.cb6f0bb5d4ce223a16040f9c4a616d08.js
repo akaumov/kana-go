@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "76386327802742b667f88b83c9bdd3c1",
+    "revision": "2d70a5e5e204482775bac7c5753b9b22",
     "url": "/kana-go/index.html"
   },
   {
-    "revision": "23bff2cf532d2dee456b",
-    "url": "/kana-go/static/css/main.145fa019.chunk.css"
+    "revision": "2c5e6ed73819c6acf94c",
+    "url": "/kana-go/static/css/main.55f160e9.chunk.css"
   },
   {
-    "revision": "0777c5f977f81630fd2b",
-    "url": "/kana-go/static/js/2.9a35224e.chunk.js"
+    "revision": "d2566c98f22da0dd8e21",
+    "url": "/kana-go/static/js/2.154e22e6.chunk.js"
   },
   {
-    "revision": "23bff2cf532d2dee456b",
-    "url": "/kana-go/static/js/main.e94c542d.chunk.js"
+    "revision": "2c5e6ed73819c6acf94c",
+    "url": "/kana-go/static/js/main.be43939c.chunk.js"
   },
   {
     "revision": "606deef35a2ffa107052",
