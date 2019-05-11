@@ -32,20 +32,58 @@ const HIRAGANA_ITEMS = ['-', 'k', 's', 't', 'n', 'h', 'm', 'y', 'r', 'w'].map(fi
     })
 });
 
+const DAKUON_ITEMS = ['k', 's', 't', 'h'].map(firstSymbol => {
+    const setOfSymbols = kana[firstSymbol];
+
+    return ['a', 'i', 'u', 'e', 'o'].map(secondSymbol => {
+
+        const symbolData = setOfSymbols[secondSymbol];
+        if (!symbolData || !symbolData.Dakuon) {
+            return {}
+        }
+
+
+        return {
+            id: symbolData.Dakuon.Romaji,
+            hiragana: symbolData.Dakuon.Hiragana,
+            katakana: symbolData.Dakuon.Katakana,
+            romaji: symbolData.Dakuon.Romaji,
+        }
+    })
+});
+
+const HANDAKUON_ITEMS = ['h'].map(firstSymbol => {
+    const setOfSymbols = kana[firstSymbol];
+
+    return ['a', 'i', 'u', 'e', 'o'].map(secondSymbol => {
+
+        const symbolData = setOfSymbols[secondSymbol];
+        if (!symbolData || !symbolData.Dakuon) {
+            return {}
+        }
+
+
+        return {
+            id: symbolData.Handakuon.Romaji,
+            hiragana: symbolData.Handakuon.Hiragana,
+            katakana: symbolData.Handakuon.Katakana,
+            romaji: symbolData.Handakuon.Romaji,
+        }
+    })
+});
+
 const KANA_TABLE = [
     {
-        name: 'Basic1',
+        name: 'Basic',
         items: HIRAGANA_ITEMS
     },
-
     {
-        name: 'Basic2',
-        items: HIRAGANA_ITEMS
+        name: 'Dakuon',
+        items: DAKUON_ITEMS
     },
-
     {
-        name: 'Basic3',
-        items: HIRAGANA_ITEMS
+        name: 'Handakuon',
+        items: HANDAKUON_ITEMS
     },
 ];
 
