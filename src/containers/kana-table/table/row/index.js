@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import Item from "./item";
 
+import style from './style.module.scss';
+
 class Row extends React.Component {
     _handleClickItem = (itemId) => (e) => {
         e.stopPropagation();
@@ -12,21 +14,20 @@ class Row extends React.Component {
     render() {
         const {characterType, items} = this.props;
         return (
-            <tr>
+            <div className={style.row}>
                 {
                     items.map((item, index) => (
-                        <td key={index}>
-                            <Item
-                                characterType={characterType}
-                                romaji={item.romaji}
-                                katakana={item.katakana}
-                                hiragana={item.hiragana}
-                                onClick={this._handleClickItem(item.id)}
-                            />
-                        </td>
+                        <Item
+                            key={index}
+                            characterType={characterType}
+                            romaji={item.romaji}
+                            katakana={item.katakana}
+                            hiragana={item.hiragana}
+                            onClick={this._handleClickItem(item.id)}
+                        />
                     ))
                 }
-            </tr>
+            </div>
         );
     }
 }

@@ -33,7 +33,7 @@ class CharacterTypeSwitcher extends React.Component {
                             className={activeTypeId === item.id ? style.activeItem : style.item}
                             onClick={this._handleToggleItem(item.id)}
                         >
-                            {item.label}
+                            <span>{item.label}</span>
                         </li>
                     ))
                 }

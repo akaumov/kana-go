@@ -1,5 +1,66 @@
 @import 'styles/helpers';
 
-.table {
-  width: 450px;
+//.sectionHeader {
+//  font-size: 18px;
+//  font-weight: bold;
+//  color: #a1aab8;
+//  margin-left: 25px;
+//  z-index: 200;
+//}
+
+.sectionSeparator {
+  height: 50px;
 }
+
+
+////
+
+.sectionHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+
+  font-size: 18px;
+  font-weight: bold;
+  color: #a1aab8;
+  margin-left: 25px;
+  z-index: 200;
+
+  background: transparent;
+  pointer-events: none;
+
+  > div {
+    width: 100%;
+    background: transparent;
+    pointer-events: none;
+  }
+}
+
+.stickySectionHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  z-index: 200;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  max-width: 450px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.sectionHeaderData {
+  display: inline-block;
+}
+
+//.sectionHData {
+//  position: sticky;
+//  top: 65px;
+//  z-index: 300;
+//}

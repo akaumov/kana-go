@@ -1,5 +1,6 @@
 import React from 'react';
 import {withRouter} from "react-router-dom";
+import Sticky from 'react-stickynode';
 
 import kana from 'japanese-json';
 
@@ -9,8 +10,9 @@ import CharacterCard from "./character-card";
 import CharacterTypeSwitcher from "./character-type-switcher";
 
 import style from './style.module.scss';
+import TableHeader from "./table-header";
 
-const KANA_TABLE = ['-', 'k', 's', 't', 'n', 'h', 'm', 'y', 'r', 'w'].map(firstSymbol => {
+const HIRAGANA_ITEMS = ['-', 'k', 's', 't', 'n', 'h', 'm', 'y', 'r', 'w'].map(firstSymbol => {
     const setOfSymbols = kana[firstSymbol];
 
     return ['a', 'i', 'u', 'e', 'o'].map(secondSymbol => {
@@ -29,6 +31,23 @@ const KANA_TABLE = ['-', 'k', 's', 't', 'n', 'h', 'm', 'y', 'r', 'w'].map(firstS
         }
     })
 });
+
+const KANA_TABLE = [
+    {
+        name: 'Basic1',
+        items: HIRAGANA_ITEMS
+    },
+
+    {
+        name: 'Basic2',
+        items: HIRAGANA_ITEMS
+    },
+
+    {
+        name: 'Basic3',
+        items: HIRAGANA_ITEMS
+    },
+];
 
 class KanaTablePage extends React.Component {
 
@@ -49,26 +68,28 @@ class KanaTablePage extends React.Component {
 
     render() {
         const {openedCharacter, characterType} = this.props;
+        console.log('KANA', kana);
+        console.log('KANA2', KANA_TABLE);
         return (
             <div className={style.kanaTablePage}>
                 <Header
                     title={'Kana table'}
                 />
                 <div className={style.content}>
-                    <div className={style.tableHeader}>
-                        <CharacterTypeSwitcher
-                            activeTypeId={characterType}
-                            onSelect={this._handleChangeCharacterType}
-                        />
-                    </div>
+                    <TableHeader
+                        key='table-header'
+                        characterType={characterType}
+                        onChangeCharacterType={this._handleChangeCharacterType}
+                    />
                     <Table
                         characterType={characterType}
-                        items={KANA_TABLE}
+                        tableData={KANA_TABLE}
                         onClickItem={this._handleClickItem}
                     />
                     {
                         openedCharacter &&
                         <CharacterCard
+                            key={'character-card'}
                             characterType={characterType}
                             character={openedCharacter}
                             onClosed={this._handleCharacterCardClosed}
@@ -87,16 +108,20 @@ const mapRouterToProps = (KanaTablePage) => (props) => {
     let openedCharacter = null;
 
     if (openedCharacterId) {
-        KANA_TABLE.some(rowItems => {
-            return rowItems.some(item => {
-                if (item.id !== openedCharacterId) {
-                    return false;
-                }
+        KANA_TABLE.some(section => {
+            const {items} = section;
 
-                openedCharacter = item;
-                return true;
+            items.some(rowItems => {
+                return rowItems.some(item => {
+                    if (item.id !== openedCharacterId) {
+                        return false;
+                    }
+
+                    openedCharacter = item;
+                    return true;
+                });
             });
-        });
+        })
     }
 
     return (

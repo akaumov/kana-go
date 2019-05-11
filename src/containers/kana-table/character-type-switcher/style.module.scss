@@ -7,6 +7,7 @@ $item-width: 100px;
   flex-direction: row;
   position: relative;
   padding: 0;
+  margin: 0;
 
   &:after {
     content: "";
@@ -34,10 +35,11 @@ $item-width: 100px;
 
 .item {
   list-style: none;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   padding-left: 15px;
   padding-right: 15px;
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
   padding-bottom: 5px;
 
@@ -45,6 +47,7 @@ $item-width: 100px;
   user-select: none;
 
   width: 100px;
+  padding-top: 10px;
 }
 
 .activeItem {

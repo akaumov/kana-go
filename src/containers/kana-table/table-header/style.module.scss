@@ -1,0 +1,36 @@
+@import 'styles/helpers';
+
+.tableHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+
+  > div {
+    width: 100%;
+    height: 45px;
+  }
+}
+
+.stickyTableHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  z-index: 100;
+
+  > div {
+    background: white;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .06);
+  }
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  max-width: 450px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-end;
+}

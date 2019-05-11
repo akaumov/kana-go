@@ -10,6 +10,10 @@
   padding-left: 20px;
   padding-right: 25px;
   align-items: center;
+
+  position: fixed;
+  top: 0;
+  z-index: 1000;
 }
 
 .backButton {
