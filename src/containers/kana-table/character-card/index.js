@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ScrollLock from 'react-scrolllock';
 
 import Modal from "../../../components/modal";
 
@@ -18,38 +19,40 @@ class CharacterCard extends React.Component {
 
         return (
             <Modal>
-                <div className={style.dialog}>
-                    <button
-                        className={style.closeButton}
-                        onClick={onClosed}
-                    >
-                        <i className="ion ion-ios-close" />
-                    </button>
-                    <div className={style.content}>
-                        <div className={style.mainInfo}>
-                            <div className={mainSymbol.length === 1 ? style.mainSymbol : style.mainSymbolYoon}>
-                                {mainSymbol}
+                <ScrollLock>
+                    <div className={style.dialog}>
+                        <button
+                            className={style.closeButton}
+                            onClick={onClosed}
+                        >
+                            <i className="ion ion-ios-close"/>
+                        </button>
+                        <div className={style.content}>
+                            <div className={style.mainInfo}>
+                                <div className={mainSymbol.length === 1 ? style.mainSymbol : style.mainSymbolYoon}>
+                                    {mainSymbol}
+                                </div>
+                                <div className={style.romaji}>
+                                    {character.romaji}
+                                </div>
+                                <div className={style.characterType}>
+                                    {characterTypeText}
+                                </div>
                             </div>
-                            <div className={style.romaji}>
-                                {character.romaji}
-                            </div>
-                            <div className={style.characterType}>
-                                {characterTypeText}
-                            </div>
-                        </div>
-                        <div className={style.bottomInfo}>
-                            <div className={style.oneToOne}>
-                                <span>{secondaryCharacterTypeText}</span>
-                                <i className="ion ion-ios-arrow-round-forward"/>
-                                {secondarySymbol}
-                            </div>
+                            <div className={style.bottomInfo}>
+                                <div className={style.oneToOne}>
+                                    <span>{secondaryCharacterTypeText}</span>
+                                    <i className="ion ion-ios-arrow-round-forward"/>
+                                    {secondarySymbol}
+                                </div>
 
-                            <button className={style.playSoundButton}>
-                                <i className="ion ion-ios-volume-high"/>
-                            </button>
+                                <button className={style.playSoundButton}>
+                                    <i className="ion ion-ios-volume-high"/>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </ScrollLock>
             </Modal>
         );
     }
