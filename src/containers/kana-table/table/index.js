@@ -5,33 +5,34 @@ import Sticky from 'react-stickynode';
 import Row from "./row";
 import style from './style.module.scss';
 
+export const SectionStates = {
+    ORIGINAL: 0,
+    RELEASED: 1,
+    FIXED: 2
+};
+
 class Table extends React.Component {
+    _handleChangeSectionState = (sectionIndex) => ({status: stickyStatus}) => {
+        const status = Object.keys(SectionStates).find(key => SectionStates[key] === stickyStatus);
+        this.props.onChangeSectionState(sectionIndex, SectionStates[status]);
+    };
+
     render() {
         const {tableData, onClickItem, characterType} = this.props;
         return tableData.map((section, sectionIndex) => {
             const {name: sectionName, items} = section;
             return (
                 [
-                    sectionIndex > 0 &&
-                    <div
-                        key={`section_${sectionIndex}_separator`}
-                        className={style.sectionSeparator}
-                    />,
                     <Sticky
-                       key={`section_${sectionIndex}`}
-                       enabled={true}
-                       top={65}
-                       activeClass={style.stickySectionHeader}
-                       className={style.sectionHeader}
-                      releasedClass={style.sectionHeader}
+                        key={`section_${sectionIndex}`}
+                        enabled={true}
+                        top={65}
+                        onStateChange={this._handleChangeSectionState(sectionIndex)}
                     >
-                       <div className={style.container}>
-                           <div
-                               className={style.sectionHeaderData}
-                           >
-                               {sectionName}
-                           </div>
-                       </div>
+                        <div
+                            key={`section_${sectionIndex}_separator`}
+                            className={style.sectionSeparator}
+                        />
                     </Sticky>,
                     ...items.map((row, index) => (
                         <Row
@@ -50,7 +51,8 @@ class Table extends React.Component {
 Table.propTypes = {
     characterType: PropTypes.oneOf(['hiragana', 'katakana']),
     tableData: PropTypes.array.isRequired,
-    onClickItem: PropTypes.func.isRequired
+    onClickItem: PropTypes.func.isRequired,
+    onChangeSectionState: PropTypes.func.isRequired
 };
 
 Table.defaultProps = {};

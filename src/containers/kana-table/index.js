@@ -1,93 +1,21 @@
 import React from 'react';
 import {withRouter} from "react-router-dom";
-import Sticky from 'react-stickynode';
 
-import kana from 'japanese-json';
+import kanaData from '../../kana_data';
 
 import Header from './header';
-import Table from "./table";
+import TableHeader from "./table-header";
+import Table, {SectionStates} from "./table";
 import CharacterCard from "./character-card";
-import CharacterTypeSwitcher from "./character-type-switcher";
 
 import style from './style.module.scss';
-import TableHeader from "./table-header";
 
-const HIRAGANA_ITEMS = ['-', 'k', 's', 't', 'n', 'h', 'm', 'y', 'r', 'w'].map(firstSymbol => {
-    const setOfSymbols = kana[firstSymbol];
-
-    return ['a', 'i', 'u', 'e', 'o'].map(secondSymbol => {
-
-        const symbolData = setOfSymbols[secondSymbol];
-        if (!symbolData || !symbolData.Seion) {
-            return {}
-        }
-
-
-        return {
-            id: symbolData.Seion.Romaji,
-            hiragana: symbolData.Seion.Hiragana,
-            katakana: symbolData.Seion.Katakana,
-            romaji: symbolData.Seion.Romaji,
-        }
-    })
-});
-
-const DAKUON_ITEMS = ['k', 's', 't', 'h'].map(firstSymbol => {
-    const setOfSymbols = kana[firstSymbol];
-
-    return ['a', 'i', 'u', 'e', 'o'].map(secondSymbol => {
-
-        const symbolData = setOfSymbols[secondSymbol];
-        if (!symbolData || !symbolData.Dakuon) {
-            return {}
-        }
-
-
-        return {
-            id: symbolData.Dakuon.Romaji,
-            hiragana: symbolData.Dakuon.Hiragana,
-            katakana: symbolData.Dakuon.Katakana,
-            romaji: symbolData.Dakuon.Romaji,
-        }
-    })
-});
-
-const HANDAKUON_ITEMS = ['h'].map(firstSymbol => {
-    const setOfSymbols = kana[firstSymbol];
-
-    return ['a', 'i', 'u', 'e', 'o'].map(secondSymbol => {
-
-        const symbolData = setOfSymbols[secondSymbol];
-        if (!symbolData || !symbolData.Dakuon) {
-            return {}
-        }
-
-
-        return {
-            id: symbolData.Handakuon.Romaji,
-            hiragana: symbolData.Handakuon.Hiragana,
-            katakana: symbolData.Handakuon.Katakana,
-            romaji: symbolData.Handakuon.Romaji,
-        }
-    })
-});
-
-const KANA_TABLE = [
-    {
-        name: 'Basic',
-        items: HIRAGANA_ITEMS
-    },
-    {
-        name: 'Dakuon',
-        items: DAKUON_ITEMS
-    },
-    {
-        name: 'Handakuon',
-        items: HANDAKUON_ITEMS
-    },
-];
 
 class KanaTablePage extends React.Component {
+
+    state = {
+        currentSection: null
+    };
 
     _handleClickItem = (itemId) => {
         const {history, characterType} = this.props;
@@ -104,10 +32,19 @@ class KanaTablePage extends React.Component {
         history.replace(`/kana-table/${characterType}`);
     };
 
+    _handleChangeSectionState = (sectionIndex, state) => {
+        console.log('CHANGE', {sectionIndex, status: state});
+        if (state === SectionStates.FIXED || state === SectionStates.ORIGINAL) {
+            this.setState({
+                currentSection: kanaData[sectionIndex]
+            });
+        }
+    };
+
     render() {
         const {openedCharacter, characterType} = this.props;
-        console.log('KANA', kana);
-        console.log('KANA2', KANA_TABLE);
+        const {currentSection} = this.state;
+
         return (
             <div className={style.kanaTablePage}>
                 <Header
@@ -118,11 +55,13 @@ class KanaTablePage extends React.Component {
                         key='table-header'
                         characterType={characterType}
                         onChangeCharacterType={this._handleChangeCharacterType}
+                        currentSectionName={currentSection && currentSection.name}
                     />
                     <Table
                         characterType={characterType}
-                        tableData={KANA_TABLE}
+                        tableData={kanaData}
                         onClickItem={this._handleClickItem}
+                        onChangeSectionState={this._handleChangeSectionState}
                     />
                     {
                         openedCharacter &&
@@ -146,7 +85,7 @@ const mapRouterToProps = (KanaTablePage) => (props) => {
     let openedCharacter = null;
 
     if (openedCharacterId) {
-        KANA_TABLE.some(section => {
+        kanaData.some(section => {
             const {items} = section;
 
             items.some(rowItems => {

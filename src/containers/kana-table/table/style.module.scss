@@ -9,7 +9,8 @@
 //}
 
 .sectionSeparator {
-  height: 50px;
+  height: 1px;
+  margin-bottom: 50px;
 }
 
 
@@ -53,14 +54,13 @@
   margin: 0 auto;
   display: flex;
   justify-content: flex-start;
+
 }
 
 .sectionHeaderData {
   display: inline-block;
-}
+  background: white;
 
-//.sectionHData {
-//  position: sticky;
-//  top: 65px;
-//  z-index: 300;
-//}
+  //FIXME: hack
+  width: 100px;
+}

@@ -8,7 +8,7 @@ import style from './style.module.scss';
 class TableHeader extends React.Component {
     render() {
         const DESKTOP_HEADER_HEIGHT = 45;
-        const {characterType, onChangeCharacterType} = this.props;
+        const {characterType, onChangeCharacterType, currentSectionName} = this.props;
         return (
             <Sticky
                 enabled={true}
@@ -18,6 +18,9 @@ class TableHeader extends React.Component {
                 releasedClass={style.tableHeader}
             >
                 <div className={style.container}>
+                    <div className={style.sectionName}>
+                        <span>{currentSectionName}</span>
+                    </div>
                     <CharacterTypeSwitcher
                         activeTypeId={characterType}
                         onSelect={onChangeCharacterType}
