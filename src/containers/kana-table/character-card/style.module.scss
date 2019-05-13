@@ -35,10 +35,9 @@ $desktop-dialog-height: 480px;
 }
 
 .closeButton {
-  $size: 30px;
-  padding: 2px;
-  width: $size;
-  height: $size;
+  $size: 45px;
+  padding: 5px;
+  font-size: $size;
 
   border: none;
   background: none;
@@ -48,10 +47,11 @@ $desktop-dialog-height: 480px;
   right: 15px;
   top: 10px;
 
-  outline: none;
 
-  font-size: 45px;
+  outline: none;
   color: $secondary-text-color;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+
 
   &:hover {
     color: $accent-color;
@@ -59,6 +59,9 @@ $desktop-dialog-height: 480px;
 
   &:focus {
     outline: none;
+    border: none;
+    box-shadow: none;
+    //-webkit-tap-highlight-color: rgba(0,0,0,0);
   }
 }
 
@@ -142,10 +145,28 @@ $desktop-dialog-height: 480px;
   color: $accent-color;
 }
 
+@keyframes show-animation-mobile {
+  0% {
+    transform: scale(0.8);
+    border-radius: 20px;
+  }
+
+  100% {
+    transform: scale(1);
+    border-radius: 0;
+  }
+}
+
+
 @media (max-width: ($desktop-dialog-width + 100px)), (max-height: ($desktop-dialog-height + 100px)) {
   .dialog {
     width: 100%;
     height: 100%;
     border-radius: 0;
+    position: fixed;
+    top: 0;
+
+    animation-name: show-animation-mobile;
+    animation-duration: 200ms;
   }
 }
