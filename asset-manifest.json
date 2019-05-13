@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/kana-go/static/css/main.5c18c170.chunk.css",
-    "main.js": "/kana-go/static/js/main.7843b1a8.chunk.js",
-    "main.js.map": "/kana-go/static/js/main.7843b1a8.chunk.js.map",
+    "main.js": "/kana-go/static/js/main.d7ce0f50.chunk.js",
+    "main.js.map": "/kana-go/static/js/main.d7ce0f50.chunk.js.map",
     "runtime~main.js": "/kana-go/static/js/runtime~main.30f9621d.js",
     "runtime~main.js.map": "/kana-go/static/js/runtime~main.30f9621d.js.map",
-    "static/js/2.edaabeef.chunk.js": "/kana-go/static/js/2.edaabeef.chunk.js",
-    "static/js/2.edaabeef.chunk.js.map": "/kana-go/static/js/2.edaabeef.chunk.js.map",
+    "static/js/2.9d9a228e.chunk.js": "/kana-go/static/js/2.9d9a228e.chunk.js",
+    "static/js/2.9d9a228e.chunk.js.map": "/kana-go/static/js/2.9d9a228e.chunk.js.map",
     "index.html": "/kana-go/index.html",
-    "precache-manifest.aca5037bfd8c885b9944fee9dc22e6f2.js": "/kana-go/precache-manifest.aca5037bfd8c885b9944fee9dc22e6f2.js",
+    "precache-manifest.3973bced0eb0aaee3eb8b27e0d50793b.js": "/kana-go/precache-manifest.3973bced0eb0aaee3eb8b27e0d50793b.js",
     "service-worker.js": "/kana-go/service-worker.js",
     "static/css/main.5c18c170.chunk.css.map": "/kana-go/static/css/main.5c18c170.chunk.css.map",
     "static/media/_ionicons_svg_ios-arrow-back.870690d2.svg": "/kana-go/static/media/_ionicons_svg_ios-arrow-back.870690d2.svg"
