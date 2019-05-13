@@ -1,5 +1,15 @@
 @import 'styles/helpers';
 
+@keyframes show-animation {
+  0% {
+    background: rgba(0, 0, 0, 0);
+  }
+
+  100% {
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
+
 .backdrop {
   display: flex;
   flex-direction: column;
@@ -13,4 +23,9 @@
   background: rgba(0, 0, 0, 0.2);
 
   z-index: 1000;
+
+  animation-name: show-animation;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
 }
