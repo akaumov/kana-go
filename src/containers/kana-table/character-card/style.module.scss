@@ -1,5 +1,8 @@
 @import 'styles/helpers';
 
+$desktop-dialog-width: 350px;
+$desktop-dialog-height: 480px;
+
 .dialog {
   display: flex;
   flex-direction: column;
@@ -7,7 +10,8 @@
   background: white;
 
   border: 15px;
-  width: 400px;
+  width: $desktop-dialog-width;
+  height: $desktop-dialog-height;
 
   padding: 40px;
   padding-bottom: 30px;
@@ -52,17 +56,34 @@
   height: 100%;
 }
 
+.mainInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
 .mainSymbol {
   text-align: center;
-  font-size: 250px;
+  font-size: 220px;
   line-height: 1;
   margin-top: 20px;
+}
+
+.mainSymbolYoon {
+  composes: mainSymbol;
+  font-size: 150px;
+  white-space: nowrap;
+  letter-spacing: 0;
 }
 
 .romaji {
   font-size: 60px;
   text-align: center;
   line-height: 60px;
+  white-space: nowrap;
 }
 
 .bottomInfo {
@@ -86,7 +107,7 @@
 
   font-size: 25px;
 
-  >i {
+  > i {
     display: inline-block;
     padding-left: 5px;
     padding-right: 5px;
@@ -104,4 +125,12 @@
   cursor: pointer;
   user-select: none;
   color: $accent-color;
+}
+
+@media (max-width: ($desktop-dialog-width + 100px)), (max-height: ($desktop-dialog-height + 100px)) {
+  .dialog {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
 }

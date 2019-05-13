@@ -5,8 +5,6 @@ import Modal from "../../../components/modal";
 
 import style from './style.module.scss';
 
-import closeIcon from '../../../assets/icons/_ionicons_svg_md-close.svg';
-
 class CharacterCard extends React.Component {
     render() {
         const {characterType, character, onClosed} = this.props;
@@ -28,14 +26,16 @@ class CharacterCard extends React.Component {
                         <i className="ion ion-ios-close" />
                     </button>
                     <div className={style.content}>
-                        <div className={style.mainSymbol}>
-                            {mainSymbol}
-                        </div>
-                        <div className={style.romaji}>
-                            {character.romaji}
-                        </div>
-                        <div className={style.characterType}>
-                            {characterTypeText}
+                        <div className={style.mainInfo}>
+                            <div className={mainSymbol.length === 1 ? style.mainSymbol : style.mainSymbolYoon}>
+                                {mainSymbol}
+                            </div>
+                            <div className={style.romaji}>
+                                {character.romaji}
+                            </div>
+                            <div className={style.characterType}>
+                                {characterTypeText}
+                            </div>
                         </div>
                         <div className={style.bottomInfo}>
                             <div className={style.oneToOne}>
