@@ -1,5 +1,6 @@
 [
   {
+    "id": "basic",
     "name": "Basic",
     "items": [
       [
@@ -300,7 +301,8 @@
     ]
   },
   {
-    "name": "Dakuon",
+    "id": "handakuon_dakuon",
+    "name": "Handakuon & Dakuon",
     "items": [
       [
         {
@@ -429,12 +431,7 @@
           "katakana": "ボ",
           "romaji": "bo"
         }
-      ]
-    ]
-  },
-  {
-    "name": "Handakuon",
-    "items": [
+      ],
       [
         {
           "id": "pa",
@@ -470,6 +467,7 @@
     ]
   },
   {
+    "id": "yoon",
     "name": "Yoon",
     "items": [
       [
