@@ -4,6 +4,7 @@ import Header from "./header";
 import KanaSelector from "./kana-selector";
 
 import style from './style.module.scss';
+import TrainingDialog from "./training-dialog";
 
 class TrainingPage extends React.Component {
     render() {
@@ -18,6 +19,10 @@ class TrainingPage extends React.Component {
                             Start
                         </button>
                     </div>
+                    <TrainingDialog
+                        values={{}}
+                        onClosed={() => {}}
+                    />
                 </div>
             </div>
         );

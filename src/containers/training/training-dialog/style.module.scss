@@ -1,0 +1,176 @@
+@import 'styles/helpers';
+
+$desktop-dialog-width: 350px;
+$desktop-dialog-height: 480px;
+
+@keyframes show-animation {
+  0% {
+    transform: scale(0.8);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.background {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: white;
+
+  border: 15px;
+  width: 100%;
+  height: 100%;
+
+  padding: 40px;
+  padding-bottom: 30px;
+  overflow: hidden;
+  border-radius: 0;
+
+  animation-name: show-animation;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+  animation-duration: 50ms;
+
+  background: #8589F3;
+}
+
+.dialog {
+  @include card2();
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: white;
+
+  border: 15px;
+  width: $desktop-dialog-width;
+  height: $desktop-dialog-height;
+
+  padding: 40px;
+  padding-bottom: 30px;
+  overflow: hidden;
+  border-radius: 10px;
+
+  animation-name: show-animation;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+  animation-duration: 50ms;
+}
+
+.closeButton {
+  $size: 60px;
+  padding: 5px;
+  font-size: $size;
+
+  border: none;
+  background: none;
+  cursor: pointer;
+  user-select: none;
+  position: absolute;
+  right: 25px;
+  top: 10px;
+
+
+  outline: none;
+  color: $secondary-text-color;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+
+  &:hover {
+    color: $accent-color;
+  }
+
+  &:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+    //-webkit-tap-highlight-color: rgba(0,0,0,0);
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+}
+
+.mainInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.mainSymbol {
+  text-align: center;
+  font-size: 220px;
+  line-height: 1;
+  margin-top: 20px;
+}
+
+.mainSymbolYoon {
+  composes: mainSymbol;
+  font-size: 150px;
+  white-space: nowrap;
+  letter-spacing: 0;
+}
+
+.variants {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: stretch;
+}
+
+.variant {
+  flex: 1;
+  border: none;
+  color: black;
+  background: none;
+  font-size: 50px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+
+@keyframes show-animation-mobile {
+  0% {
+    transform: scale(0.8);
+    border-radius: 20px;
+  }
+
+  100% {
+    transform: scale(1);
+    border-radius: 0;
+  }
+}
+
+//
+//@media (max-width: ($desktop-dialog-width + 100px)), (max-height: ($desktop-dialog-height + 100px)) {
+//  .dialog {
+//    width: 100%;
+//    height: 100%;
+//    border-radius: 0;
+//    position: fixed;
+//    top: 0;
+//
+//    animation-name: show-animation-mobile;
+//    animation-duration: 200ms;
+//  }
+//}
