@@ -21,7 +21,7 @@ class Header extends React.Component {
                     <span>Home</span>
                 </button>
                 <h1 className={style.title}>
-                    Practice
+                    Training
                 </h1>
             </nav>
         );
