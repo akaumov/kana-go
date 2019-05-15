@@ -1,0 +1,61 @@
+@import 'styles/helpers';
+
+.table {
+  border-collapse: collapse;
+
+  th {
+    font-size: 10px;
+    text-align: center;
+  }
+
+  tr:nth-of-type(1) {
+    td:nth-of-type(1) {
+      border: none;
+    }
+  }
+
+  td {
+    border: 1px solid $accent-color;
+    padding: 0;
+    margin: 0;
+    width: 60px;
+    height: 60px;
+  }
+}
+
+//.kanaSelector {
+//  display: inline-flex;
+//  flex-direction: row;
+//}
+//
+//.typeLabels {
+//  display: flex;
+//  flex-direction: column;
+//}
+//
+//.typeLabel {
+//
+//}
+//
+//.table {
+//  display: flex;
+//  flex-direction: column;
+//}
+//
+//.sectionLabels {
+//  display: flex;
+//  flex-direction: row;
+//}
+//
+//.sectionLabel {
+//  flex: 1;
+//}
+//.row {
+//  display: flex;
+//  flex-direction: row;
+//}
+//
+//.sectionLabels {
+//  display: flex;
+//  flex-direction: row;
+//}

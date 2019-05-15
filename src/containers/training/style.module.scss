@@ -1,0 +1,10 @@
+@import 'styles/helpers';
+
+.trainingPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: $desktop-header-height;
+  width: 100%;
+  height: 100%;
+}

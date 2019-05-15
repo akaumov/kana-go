@@ -2,7 +2,7 @@ import React from 'react';
 import {HashRouter as Router, Route, Switch} from "react-router-dom";
 
 import HomePage from "../home";
-import PracticePage from "../practice";
+import TrainingPage from "../training";
 import KanaTablePage from "../kana-table";
 import NotFoundPage from "../404";
 
@@ -28,8 +28,8 @@ class App extends React.Component {
                     />
                     <Route
                         exact
-                        path='/practice'
-                        component={PracticePage}
+                        path='/training'
+                        component={TrainingPage}
                     />
                     <Route component={NotFoundPage}/>
                 </Switch>

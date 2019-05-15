@@ -9,8 +9,8 @@ class HomePage extends React.Component {
         this.props.history.push('/kana-table/hiragana');
     };
 
-    _handleOpenPractice = () => {
-        this.props.history.push('/practice');
+    _handleOpenTraining = () => {
+        this.props.history.push('/training');
     };
 
     render() {
@@ -26,10 +26,10 @@ class HomePage extends React.Component {
                             Alphabet
                         </button>
                         <button
-                            className={style.practiceButton}
-                            onClick={this._handleOpenPractice}
+                            className={style.trainingButton}
+                            onClick={this._handleOpenTraining}
                         >
-                            Practice
+                            Training
                         </button>
                         <div className={style.optionButtons}>
                             <button className={style.optionButton}>
