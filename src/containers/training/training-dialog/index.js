@@ -19,7 +19,7 @@ class TrainingDialog extends React.Component {
         const characterTypeText = characterType === 'hiragana' ? 'Hiragana' : 'Katakana';
         const secondaryCharacterTypeText = characterType === 'hiragana' ? 'Katakana' : 'Hiragana';
 
-        const variants = [[1, 2], [3, 4]];
+        const variants = [['あ', 'か'], ['さ', 'き']];
 
         return (
             <Modal showBackground={false}>

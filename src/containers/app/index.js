@@ -28,6 +28,11 @@ class App extends React.Component {
                     />
                     <Route
                         exact
+                        path='/training/:dialogId'
+                        component={TrainingPage}
+                    />
+                    <Route
+                        exact
                         path='/training'
                         component={TrainingPage}
                     />
