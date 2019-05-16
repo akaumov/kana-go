@@ -31,14 +31,9 @@ class HomePage extends React.Component {
                         >
                             Training
                         </button>
-                        <div className={style.optionButtons}>
-                            <button className={style.optionButton}>
-                                Info
-                            </button>
-                            <button className={style.optionButton}>
-                                Lists
-                            </button>
-                        </div>
+                        <button className={style.helpButton}>
+                            Help
+                        </button>
                     </div>
                 </div>
                 <AnimatedBackground />

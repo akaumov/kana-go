@@ -53,13 +53,40 @@
 }
 
 .kanaTableButton {
+  $button-color: #8589F3;
   composes: button;
-  background: #8589F3;
+  background: $button-color;
+  transition: background-color 300ms ease-out;
+
+  &:hover {
+    background: darken($button-color, 10%);
+  }
 }
 
 .trainingButton {
+  $button-color: #65A3F3;
+
   composes: button;
-  background: #65A3F3;
+  background: $button-color;
+
+  transition: background-color 300ms ease-out;
+
+  &:hover {
+    background: darken($button-color, 10%);
+  }
+}
+
+.helpButton {
+  $button-color: #DBE0E3;
+
+  composes: button;
+  background: $button-color;
+
+  transition: background-color 300ms ease-out;
+
+  &:hover {
+    background: darken($button-color, 10%);
+  }
 }
 
 .optionButtons {
