@@ -140,10 +140,9 @@ $desktop-dialog-height: 480px;
 
 .variant {
   flex: 1;
-  border: none;
   color: black;
   background: none;
-  font-size: 50px;
+  font-size: 35px;
 
   margin: 2px;
   text-align: center;
@@ -153,12 +152,14 @@ $desktop-dialog-height: 480px;
   outline: none;
   box-shadow: none;
   background: #ecf0f6;
+  border: 2px solid transparent;
 
   cursor: pointer;
 
   &:hover {
     outline: none;
     background: #ecf0f6;
+    border: 2px solid $accent-color;
     box-shadow: none;
   }
 }

@@ -128,6 +128,58 @@ class TrainingDialog extends React.Component {
         return charactersSet[randomIndex];
     };
 
+    _showWrongSelection = (rightVariantId, wrongVariantId) => {
+        alert('Wrong');
+        this._moveToNextQuestion();
+    };
+
+    _showRightSelection = () => {
+        alert('Right');
+        this._moveToNextQuestion();
+    };
+
+    _moveToNextQuestion = () => {
+        const {questions} = this.state;
+        const nextQuestionIndex = this.state.currentQuestionIndex + 1;
+
+        if (nextQuestionIndex >= questions.length) {
+            alert('Complete');
+            return;
+        }
+
+        this.setState({
+            currentQuestionIndex: nextQuestionIndex
+        })
+    };
+
+    _handleSelectVariant = (selectedVariant) => (e) => {
+        e.stopPropagation();
+
+        const {id: variantId} = selectedVariant;
+
+        const {currentQuestionIndex, questions} = this.state;
+        const currentQuestion = questions[currentQuestionIndex];
+
+        const newAnswers = this.state.answers.slice();
+
+        const isAnswerRight = currentQuestion.answer.id === variantId;
+        newAnswers.push({
+            isAnswerRight,
+            answer: currentQuestion.answer,
+            selectedVariant
+        });
+
+        this.setState({
+            answers: newAnswers,
+        }, () => {
+            if (isAnswerRight) {
+                this._showRightSelection(currentQuestion.answer.id, variantId);
+            } else {
+                this._showWrongSelection(currentQuestion.answer.id, variantId);
+            }
+        });
+    };
+
     render() {
         let {characterType, character, onClosed} = this.props;
         const {currentQuestionIndex, questions} = this.state;
@@ -185,6 +237,7 @@ class TrainingDialog extends React.Component {
                                                     <button
                                                         key={variant.id}
                                                         className={style.variant}
+                                                        onClick={this._handleSelectVariant(variant)}
                                                     >
                                                         {variant.value}
                                                     </button>
