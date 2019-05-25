@@ -12,6 +12,7 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
     "react-scrolllock": "^4.0.1",
+    "react-spring": "^8.0.20",
     "react-stickynode": "^2.1.1"
   },
   "scripts": {

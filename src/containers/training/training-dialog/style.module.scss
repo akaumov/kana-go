@@ -1,7 +1,10 @@
 @import 'styles/helpers';
 
 $desktop-dialog-width: 350px;
-$desktop-dialog-height: 480px;
+$desktop-dialog-height: 500px;
+
+$right-answer-color: #4cd964;
+$wrong-answer-color: #ff3b30;
 
 @keyframes show-animation {
   0% {
@@ -72,13 +75,13 @@ $desktop-dialog-height: 480px;
   cursor: pointer;
   user-select: none;
   position: absolute;
-  right: 25px;
-  top: 10px;
+  right: 15px;
+  top: 0px;
 
 
   outline: none;
   color: $secondary-text-color;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
 
   &:hover {
@@ -155,12 +158,63 @@ $desktop-dialog-height: 480px;
   border: 2px solid transparent;
 
   cursor: pointer;
+  transition: background-color 300ms ease-in-out;
 
   &:hover {
     outline: none;
     background: #ecf0f6;
     border: 2px solid $accent-color;
     box-shadow: none;
+  }
+
+  &[data-selection-state="disabled"] {
+    &:hover {
+      border: 2px solid transparent;
+    }
+  }
+
+  &[data-selection-state="right"] {
+    background: $right-answer-color;
+    color: white;
+    border: 2px solid transparent;
+
+    &:hover {
+      background: $right-answer-color;
+      border: 2px solid transparent;
+    }
+  }
+
+  &[data-selection-state="wrong"] {
+
+    background: $wrong-answer-color;
+    color: white;
+    border: 2px solid transparent;
+
+    &:hover {
+      background: $wrong-answer-color;
+      border: 2px solid transparent;
+    }
+  }
+}
+
+.skipContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  padding-bottom: 15px;
+
+  >button {
+    position: absolute;
+    left: 0;
+    border: none;
+    background: none;
+    white-space: nowrap;
+    color: $accent-color;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: underline;
   }
 }
 

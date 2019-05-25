@@ -13,6 +13,10 @@ const QuestionsDirection = Object.freeze({
     BOTH: 'BOTH'
 });
 
+const TestStates = Object.freeze({
+
+});
+
 class TrainingDialog extends React.Component {
 
     constructor(props) {
@@ -20,61 +24,41 @@ class TrainingDialog extends React.Component {
 
         const selectedSectionIds = ['basic'];
         this.state = {
-            questions: this._generateQuestions(selectedSectionIds, 5),
+            tests: this._generateTests(selectedSectionIds, 5),
             answers: [],
-            currentQuestionIndex: 0
+            currentTestIndex: 0,
+            currentTestState: 'select'
         };
-
-        // global._getCharactersSet = this._getCharactersSet;
-        // global._getRandomCharacter = this._getRandomCharacter;
-        // global._getVariants = this._getVariants;
     }
 
 
-    _generateQuestions = (selectedSectionIds, limit, questionsDirections) => {
+    _generateTests = (selectedSectionIds, limit, questionsDirections) => {
 
         const characters = this._getCharactersSet(selectedSectionIds);
-        const questions = [];
+        const tests = [];
+        const questionCharacterType = 'romaji';
+        const variantCharacterType = 'katakana';
 
-        let questionIndex = 0;
-        while (questions.length < limit) {
+        while (tests.length < limit) {
             const randomIndex = Math.round(Math.random() * (characters.length - 1));
 
             const questionCharacter = characters[randomIndex];
-            const isQuestionExist = questions.find(question => question.answerCharacterId === questionCharacter.id);
+            const isQuestionExist = tests.find(test => test.question === questionCharacter[questionCharacterType]);
 
             if (isQuestionExist) {
                 continue;
             }
 
-            const answerCharacterType = 'romaji';
-            const variantCharacterType = 'katakana';
-            //
-            // let variantCharacterType;
-            // let questionCharacterType;
-
-            // switch (questionsDirections) {
-            //     case QuestionsDirection.BOTH:
-            //         questionCharacterType = questionIndex % 2 === 0 ? 'katakana' : 'hiragana';
-            //         variantCharacterType = questionCharacterType === 'hiragana' ? 'katakana' : 'hiragana';
-            //         break;
-            //     case QuestionsDirection.FROM_ROMAJI:
-            //         questionCharacterType = questionIndex % 2 === 0 ? 'katakana' : 'hiragana';
-            //         variantCharacterType = questionCharacterType === 'hiragana' ? 'katakana' : 'hiragana';
-            //         break;
-            // }
-
-            const question = {
-                answerCharacterType,
-                answer: questionCharacter,
-                variants: this._getVariants(selectedSectionIds, questionCharacter, variantCharacterType)
+            const test = {
+                question: questionCharacter[questionCharacterType],
+                answer: questionCharacter[variantCharacterType],
+                variants: this._generateVariants(selectedSectionIds, questionCharacter, variantCharacterType)
             };
 
-            questions.push(question);
-            questionIndex++;
+            tests.push(test);
         }
 
-        return questions;
+        return tests;
     };
 
 
@@ -91,7 +75,7 @@ class TrainingDialog extends React.Component {
         return characters;
     };
 
-    _getVariants = (sectionsIds, currentCharacter, variantCharacterType) => {
+    _generateVariants = (sectionsIds, currentCharacter, variantCharacterType) => {
 
         const NUMBER_OF_VARIANTS = 4;
 
@@ -116,10 +100,7 @@ class TrainingDialog extends React.Component {
         const randomIndex = Math.round(Math.random() * (NUMBER_OF_VARIANTS - 1));
 
         randomCharacters.splice(randomIndex, 0, currentCharacter);
-        return randomCharacters.map(character => ({
-            id: character.id,
-            value: character[variantCharacterType]
-        }))
+        return randomCharacters.map(character => character[variantCharacterType])
     };
 
 
@@ -129,119 +110,136 @@ class TrainingDialog extends React.Component {
     };
 
     _showWrongSelection = (rightVariantId, wrongVariantId) => {
-        alert('Wrong');
-        this._moveToNextQuestion();
+        // alert('Wrong');
+        // this._moveToNextTest();
     };
 
     _showRightSelection = () => {
-        alert('Right');
-        this._moveToNextQuestion();
+        // alert('Right');
+        // this._moveToNextTest();
     };
 
-    _moveToNextQuestion = () => {
-        const {questions} = this.state;
-        const nextQuestionIndex = this.state.currentQuestionIndex + 1;
+    _moveToNextTest = () => {
+        const {tests} = this.state;
+        const nextQuestionIndex = this.state.currentTestIndex + 1;
 
-        if (nextQuestionIndex >= questions.length) {
+        if (nextQuestionIndex >= tests.length) {
             alert('Complete');
             return;
         }
 
         this.setState({
-            currentQuestionIndex: nextQuestionIndex
+            currentTestIndex: nextQuestionIndex
         })
     };
 
     _handleSelectVariant = (selectedVariant) => (e) => {
         e.stopPropagation();
 
-        const {id: variantId} = selectedVariant;
-
-        const {currentQuestionIndex, questions} = this.state;
-        const currentQuestion = questions[currentQuestionIndex];
+        const {currentTestIndex, tests} = this.state;
+        const test = tests[currentTestIndex];
 
         const newAnswers = this.state.answers.slice();
 
-        const isAnswerRight = currentQuestion.answer.id === variantId;
+        const isAnswerRight = test.answer === selectedVariant;
+
         newAnswers.push({
-            isAnswerRight,
-            answer: currentQuestion.answer,
+            isRight: isAnswerRight,
+            rightAnswer: test.answer,
             selectedVariant
         });
 
         this.setState({
             answers: newAnswers,
-        }, () => {
-            if (isAnswerRight) {
-                this._showRightSelection(currentQuestion.answer.id, variantId);
-            } else {
-                this._showWrongSelection(currentQuestion.answer.id, variantId);
-            }
+            currentTestState: 'showResult'
         });
+
+        if (isAnswerRight) {
+
+            setTimeout(this._moveToNextTest, 1000);
+
+        }
     };
 
     render() {
-        let {characterType, character, onClosed} = this.props;
-        const {currentQuestionIndex, questions} = this.state;
+        const {onClosed} = this.props;
+        const {currentTestIndex, currentTestState, tests, answers} = this.state;
 
-        characterType = 'hiragana';
-        character = {hiragana: 'ka', romaji: 'b', katakana: 'c'}
-        const {hiragana, katakana, romaji} = character;
+        const currentTest = tests[currentTestIndex];
+        const question = currentTest.question;
+        const currentAnswer = answers[currentTestIndex];
 
-        let mainSymbol = characterType === 'hiragana' ? hiragana : katakana;
-        let secondarySymbol = characterType === 'hiragana' ? katakana : hiragana;
+        const variants = currentTest.variants.map(variant => {
 
-        const characterTypeText = characterType === 'hiragana' ? 'Hiragana' : 'Katakana';
-        const secondaryCharacterTypeText = characterType === 'hiragana' ? 'Katakana' : 'Hiragana';
+            let variantState = 'selection';
+            if (currentAnswer) {
+                variantState = 'disabled';
+                if (variant === currentAnswer.rightAnswer) {
+                    variantState = 'right';
+                } else if (variant === currentAnswer.selectedVariant) {
+                    variantState = 'wrong';
+                }
+            }
 
-        const currentQuestion = questions[currentQuestionIndex];
-        const variants = [
+            return {
+                value: variant,
+                state: variantState
+            }
+
+        });
+
+        const items = [
             [
-                currentQuestion.variants[0],
-                currentQuestion.variants[1],
+                variants[0],
+                variants[1],
             ],
             [
-                currentQuestion.variants[2],
-                currentQuestion.variants[3],
+                variants[2],
+                variants[3],
             ],
         ];
-
 
         return (
             <Modal showBackground={false}>
                 <ScrollLock>
                     <div className={style.background}>
-                        <button
-                            className={style.closeButton}
-                            onClick={onClosed}
-                        >
-                            <i className="ion ion-ios-close"/>
-                        </button>
                         <div className={style.dialog}>
+                            <button
+                                className={style.closeButton}
+                                onClick={onClosed}
+                            >
+                                <i className="ion ion-ios-close"/>
+                            </button>
                             <div className={style.mainInfo}>
-                                <div className={mainSymbol.length === 1 ? style.mainSymbol : style.mainSymbolYoon}>
+                                <div className={question.length === 1 ? style.mainSymbol : style.mainSymbolYoon}>
                                     {
-                                        currentQuestion.answer[currentQuestion.answerCharacterType]
+                                        question
                                     }
                                 </div>
                             </div>
+                            <div className={style.skipContainer}>
+                                <button>I don't know</button>
+
+                            </div>
                             <div className={style.variants}>
                                 {
-                                    variants.map((rowItems, rowIndex) => (
+                                    items.map((rowItems, rowIndex) => (
                                         <div
                                             key={'row' + rowIndex}
                                             className={style.row}
                                         >
                                             {
-                                                rowItems.map((variant, variantIndex) => (
-                                                    <button
-                                                        key={variant.id}
-                                                        className={style.variant}
-                                                        onClick={this._handleSelectVariant(variant)}
-                                                    >
-                                                        {variant.value}
-                                                    </button>
-                                                ))
+                                                rowItems.map(({value, state}, variantIndex) => (
+                                                        <button
+                                                            key={'variant' + variantIndex}
+                                                            className={style.variant}
+                                                            onClick={this._handleSelectVariant(value)}
+                                                            data-selection-state={state}
+                                                        >
+                                                            {value}
+                                                        </button>
+                                                    )
+                                                )
                                             }
                                         </div>
                                     ))
