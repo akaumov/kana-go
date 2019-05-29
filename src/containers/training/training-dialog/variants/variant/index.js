@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 import style from './style.module.scss';
 
 class Variant extends React.PureComponent {
+    componentWillUnmount() {
+        console.log('UNMMPU')
+    }
+
     _handleSelect = (e) => {
         const {value, onSelect} = this.props;
         e.stopPropagation();
@@ -14,7 +18,6 @@ class Variant extends React.PureComponent {
         const {isDisabled, value, state, style: containerStyle, valueStyle} = this.props;
         return (
             <button
-                key={'variant' + value}
                 className={style.variant}
                 onClick={isDisabled ? () => {} : this._handleSelect}
                 data-selection-state={state}

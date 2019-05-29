@@ -9,11 +9,38 @@ import style from './style.module.scss';
 import Variants from "./variants";
 
 import {TestState, VariantState} from './enums';
+import {Spring} from "react-spring/renderprops";
 
 const QuestionsDirection = Object.freeze({
     FROM_ROMAJI: 'FROM_ROMAJI',
     TO_ROMAJI: 'TO_ROMAJI',
     BOTH: 'BOTH'
+});
+
+const MainSymbolAnimations = Object.freeze({
+    [TestState.ENTER]: {
+        props: {
+            opacity: 1
+        },
+        config: {
+            delay: 800
+        }
+    },
+    [TestState.SHOW_RESULT]: {
+        props: {
+            opacity: 1
+        }
+    },
+    [TestState.HIDE_OLD_TEST]: {
+        props: {
+            opacity: 0
+        }
+    },
+    [TestState.LEAVE]: {
+        props: {
+            opacity: 0
+        }
+    }
 });
 
 
@@ -198,13 +225,26 @@ class TrainingDialog extends React.Component {
                             >
                                 <i className="ion ion-ios-close"/>
                             </button>
-                            <div className={style.mainInfo}>
-                                <div className={question.length === 1 ? style.mainSymbol : style.mainSymbolYoon}>
-                                    {
-                                        question
-                                    }
-                                </div>
-                            </div>
+                            <Spring
+                                key={question}
+                                from={{transform: "translate3d(0,20px,0)", opacity: 0}}
+                                to={{transform: "translate3d(0,0px,0)", opacity: 1}}
+                            >
+                                {
+                                    (props) => (
+                                        <div className={style.mainInfo}>
+                                            <div
+                                                className={question.length === 1 ? style.mainSymbol : style.mainSymbolYoon}
+                                                style={props}
+                                            >
+                                                {
+                                                    question
+                                                }
+                                            </div>
+                                        </div>
+                                    )
+                                }
+                            </Spring>
                             <div className={style.skipContainer}>
                                 <button>I don't know</button>
 
@@ -218,7 +258,7 @@ class TrainingDialog extends React.Component {
                                     onMoveToNextTest={this._moveToNextTest}
                                 />
                                 {
-                                    true &&
+                                    false &&
                                     // currentAnswer &&
                                     // !currentAnswer.isRight &&
                                     <button

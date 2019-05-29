@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Transition, config, Keyframes} from 'react-spring/renderprops';
+import {Spring, config} from 'react-spring/renderprops';
 import delay from 'delay';
-import {TestState, VariantState} from '../enums';
+import {TestState} from '../enums';
 
 import Variant from "./variant";
 
@@ -16,31 +16,12 @@ const AnimationState = Object.freeze({
     SHOW_NEW_VARIANTS: 'showNewVariants'
 });
 
-const Container = Keyframes.Spring({
-    from: {opacity: 0},
-    enter: {opacity: 1},
-    leave: {opacity: 0},
-    showResult: async (next, cancel, ownProps) => {
-        console.log('SHOW_RESULT', {next, cancel, ownProps});
-        console.log('setOpacity', {next, cancel, ownProps, X: this});
-        next({opacity: 1});
-        console.log('delay', {next, cancel, ownProps});
-        await delay(800);
-        // await delay(5000);
-        console.log('hideOldVariants', {next, cancel, ownProps});
-        // await ownProps.hideOldVariants();
-        await next({}, true)
-    },
-    hideOldVariants: async (next, cancel, ownProps) => {
-        console.log('HIDE_OLD_VARIANTS', {next, cancel, ownProps});
-        await next({opacity: 0});
-        // await delay(3000);
-        console.log('before showNewVariants', {next, cancel, ownProps});
-        // await delay(5000);
-        await next({}, true)
-    },
-    showNewVariants: {opacity: 1},
-    onRest: () => alert('CCCCCCCCC')
+const AnimationProperties = Object.freeze({
+    [AnimationState.ENTER]: {opacity: 1},
+    [AnimationState.LEAVE]: {opacity: 0},
+    [AnimationState.SHOW_RESULT]: {opacity: 0, config: {delay: 300}},
+    [AnimationState.HIDE_OLD_VARIANTS]: {opacity: 0},
+    [AnimationState.SHOW_NEW_VARIANTS]: {opacity: 1},
 });
 
 class Variants extends React.Component {
@@ -88,27 +69,35 @@ class Variants extends React.Component {
     };
 
 
+    _handleStopAnimation = () => {
+        const {onMoveToNextTest} = this.props;
+        const {animationState} = this.state;
+
+        if (animationState === AnimationState.SHOW_RESULT) {
+            this.setState({
+                animationState: AnimationState.HIDE_OLD_VARIANTS
+            })
+        } else if (animationState === AnimationState.HIDE_OLD_VARIANTS) {
+            onMoveToNextTest();
+        }
+    };
+
     render() {
         const {testId, onSelect, onMoveToNextTest} = this.props;
         const {animationState, rows} = this.state;
 
-        console.log('STATE', animationState);
+        const currentAnimation = AnimationProperties[animationState];
+        console.log('STATE', {an: currentAnimation, animationState});
+
         return (
-            <Container
-                config={{mass: 5, tension: 500, friction: 80}}
-                state={animationState}
-                // showNewVariants={() => this.setState({animationState: 'showNewVariants'})}
-                hideOldVariants={() => this.setState({animationState: AnimationState.HIDE_OLD_VARIANTS})}
-                onRest={() => {
-                    console.log('ON_RESTs2', this.state.animationState)
-                    if (this.state.animationState === AnimationState.HIDE_OLD_VARIANTS) {
-                        console.log('ON_RESTs')
-                        this.props.onMoveToNextTest();
-                    } else if(this.state.animationState === AnimationState.SHOW_RESULT) {
-                        this.setState({animationState: AnimationState.HIDE_OLD_VARIANTS})
-                    }
+            <Spring
+                from={{opacity: 0}}
+                to={currentAnimation}
+                config={{
+                    // ...config.slow,
+                    ...(currentAnimation.config || {})
                 }}
-                // onRest={() => alert('CCCCCCCCC')}
+                onRest={this._handleStopAnimation}
             >
                 {
                     (props) => (
@@ -141,7 +130,7 @@ class Variants extends React.Component {
                         </div>
                     )
                 }
-            </Container>
+            </Spring>
         );
     }
 }
