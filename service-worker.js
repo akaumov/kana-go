@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.0/workbox-sw.js");
 
 importScripts(
-  "/kana-go/precache-manifest.f239287a8f90e7cd6665e1ed3a5268a2.js"
+  "/kana-go/precache-manifest.bef2a66a7b4206b6300e5729bbb31e17.js"
 );
 
 self.addEventListener('message', (event) => {
