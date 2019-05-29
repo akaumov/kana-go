@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://akaumov.github.io/kana-go/",
   "dependencies": {
+    "delay": "^4.2.0",
     "gh-pages": "^2.0.1",
     "node-sass": "^4.11.0",
     "prop-types": "^15.7.2",

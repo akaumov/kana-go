@@ -6,6 +6,9 @@ import kanaData from '../../../kana_data';
 import Modal from "../../../components/modal";
 
 import style from './style.module.scss';
+import Variants from "./variants";
+
+import {TestState, VariantState} from './enums';
 
 const QuestionsDirection = Object.freeze({
     FROM_ROMAJI: 'FROM_ROMAJI',
@@ -13,9 +16,6 @@ const QuestionsDirection = Object.freeze({
     BOTH: 'BOTH'
 });
 
-const TestStates = Object.freeze({
-
-});
 
 class TrainingDialog extends React.Component {
 
@@ -23,14 +23,42 @@ class TrainingDialog extends React.Component {
         super(props);
 
         const selectedSectionIds = ['basic'];
+        const tests = this._generateTests(selectedSectionIds, 20);
+
         this.state = {
-            tests: this._generateTests(selectedSectionIds, 5),
+            tests,
             answers: [],
             currentTestIndex: 0,
-            currentTestState: 'select'
+            currentTestState: TestState.SELECT,
+            currentTestDisplayData: this._mapTestToDisplayData(tests[0]),
         };
     }
 
+    _mapTestToDisplayData = (test, currentAnswer) => {
+
+        const variants = test.variants.map(variant => {
+
+            let variantState = VariantState.SELECT;
+            if (currentAnswer) {
+                variantState = VariantState.DISABLED;
+                if (variant === currentAnswer.rightAnswer) {
+                    variantState = VariantState.RIGHT;
+                } else if (variant === currentAnswer.selectedVariant) {
+                    variantState = VariantState.WRONG;
+                }
+            }
+
+            return {
+                value: variant,
+                state: variantState
+            }
+        });
+
+        return {
+            ...test,
+            variants
+        }
+    };
 
     _generateTests = (selectedSectionIds, limit, questionsDirections) => {
 
@@ -109,32 +137,24 @@ class TrainingDialog extends React.Component {
         return charactersSet[randomIndex];
     };
 
-    _showWrongSelection = (rightVariantId, wrongVariantId) => {
-        // alert('Wrong');
-        // this._moveToNextTest();
-    };
-
-    _showRightSelection = () => {
-        // alert('Right');
-        // this._moveToNextTest();
-    };
-
     _moveToNextTest = () => {
         const {tests} = this.state;
-        const nextQuestionIndex = this.state.currentTestIndex + 1;
+        const nextTestIndex = this.state.currentTestIndex + 1;
 
-        if (nextQuestionIndex >= tests.length) {
+        if (nextTestIndex >= tests.length) {
             alert('Complete');
             return;
         }
 
+        const nextTest = tests[nextTestIndex];
         this.setState({
-            currentTestIndex: nextQuestionIndex
+            currentTestState: TestState.SELECT,
+            currentTestIndex: nextTestIndex,
+            currentTestDisplayData: this._mapTestToDisplayData(nextTest)
         })
     };
 
-    _handleSelectVariant = (selectedVariant) => (e) => {
-        e.stopPropagation();
+    _handleSelectVariant = (selectedVariant) => {
 
         const {currentTestIndex, tests} = this.state;
         const test = tests[currentTestIndex];
@@ -143,61 +163,29 @@ class TrainingDialog extends React.Component {
 
         const isAnswerRight = test.answer === selectedVariant;
 
-        newAnswers.push({
+        const answer = {
             isRight: isAnswerRight,
             rightAnswer: test.answer,
             selectedVariant
-        });
+        };
+        newAnswers.push(answer);
 
         this.setState({
+            currentTestState: TestState.SHOW_RESULT,
             answers: newAnswers,
-            currentTestState: 'showResult'
+            currentTestDisplayData: this._mapTestToDisplayData(test, answer)
         });
 
         if (isAnswerRight) {
-
-            setTimeout(this._moveToNextTest, 1000);
-
+            // setTimeout(this._moveToNextTest, 1000);
         }
     };
 
     render() {
         const {onClosed} = this.props;
-        const {currentTestIndex, currentTestState, tests, answers} = this.state;
+        const {currentTestState, currentTestDisplayData, currentTestIndex} = this.state;
 
-        const currentTest = tests[currentTestIndex];
-        const question = currentTest.question;
-        const currentAnswer = answers[currentTestIndex];
-
-        const variants = currentTest.variants.map(variant => {
-
-            let variantState = 'selection';
-            if (currentAnswer) {
-                variantState = 'disabled';
-                if (variant === currentAnswer.rightAnswer) {
-                    variantState = 'right';
-                } else if (variant === currentAnswer.selectedVariant) {
-                    variantState = 'wrong';
-                }
-            }
-
-            return {
-                value: variant,
-                state: variantState
-            }
-
-        });
-
-        const items = [
-            [
-                variants[0],
-                variants[1],
-            ],
-            [
-                variants[2],
-                variants[3],
-            ],
-        ];
+        const {question, variants} = currentTestDisplayData;
 
         return (
             <Modal showBackground={false}>
@@ -221,28 +209,24 @@ class TrainingDialog extends React.Component {
                                 <button>I don't know</button>
 
                             </div>
-                            <div className={style.variants}>
+                            <div className={style.bottomInfo}>
+                                <Variants
+                                    testState={currentTestState}
+                                    testId={currentTestIndex}
+                                    items={variants}
+                                    onSelect={this._handleSelectVariant}
+                                    onMoveToNextTest={this._moveToNextTest}
+                                />
                                 {
-                                    items.map((rowItems, rowIndex) => (
-                                        <div
-                                            key={'row' + rowIndex}
-                                            className={style.row}
-                                        >
-                                            {
-                                                rowItems.map(({value, state}, variantIndex) => (
-                                                        <button
-                                                            key={'variant' + variantIndex}
-                                                            className={style.variant}
-                                                            onClick={this._handleSelectVariant(value)}
-                                                            data-selection-state={state}
-                                                        >
-                                                            {value}
-                                                        </button>
-                                                    )
-                                                )
-                                            }
-                                        </div>
-                                    ))
+                                    true &&
+                                    // currentAnswer &&
+                                    // !currentAnswer.isRight &&
+                                    <button
+                                        className={style.continueButton}
+                                        onClick={this._moveToNextTest}
+                                    >
+                                        Continue
+                                    </button>
                                 }
                             </div>
                         </div>
