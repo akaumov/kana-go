@@ -3,34 +3,40 @@ import PropTypes from 'prop-types';
 
 import style from './style.module.scss';
 
-class Variant extends React.PureComponent {
-    componentWillUnmount() {
-        console.log('UNMMPU')
-    }
+function Variant(props) {
+    const {
+        isDisabled,
+        value,
+        state,
+        style: containerStyle,
+        valueStyle,
+        onSelect
+    } = props;
 
-    _handleSelect = (e) => {
-        const {value, onSelect} = this.props;
+    const _handleSelect = (e) => {
+        if (isDisabled) {
+            return;
+        }
+
         e.stopPropagation();
         onSelect(value);
     };
 
-    render() {
-        const {isDisabled, value, state, style: containerStyle, valueStyle} = this.props;
-        return (
-            <button
-                className={style.variant}
-                onClick={isDisabled ? () => {} : this._handleSelect}
-                data-selection-state={state}
-                data-disabled={!!isDisabled}
-                style={containerStyle}
-            >
+
+    return (
+        <button
+            className={style.variant}
+            onClick={_handleSelect}
+            data-selection-state={state}
+            data-disabled={!!isDisabled}
+            style={containerStyle}
+        >
                 <span style={valueStyle}>
                     {value}
                 </span>
-            </button>
+        </button>
 
-        );
-    }
+    );
 }
 
 Variant.propTypes = {

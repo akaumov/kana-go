@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useState, useEffect, useMemo} from 'react';
 import PropTypes from 'prop-types';
 import {Spring, config} from 'react-spring/renderprops';
-import delay from 'delay';
+import {usePrevious} from 'use-hooks';
 import {TestState} from '../enums';
 
 import Variant from "./variant";
@@ -24,38 +24,45 @@ const AnimationProperties = Object.freeze({
     [AnimationState.SHOW_NEW_VARIANTS]: {opacity: 1},
 });
 
-class Variants extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            animationState: AnimationState.ENTER,
-            rows: this._mapItemsToRows(props.items)
-        };
-    }
+function Variants(props) {
+    const {
+        testState,
+        testId,
+        items,
+        onSelect,
+        onMoveToNextTest
+    } = props;
 
-    componentWillReceiveProps(nextProps, nextContext) {
-        const newState = {};
+    const mapItemsToRows = (items) => ([
+        [
+            items[0],
+            items[1],
+        ],
+        [
+            items[2],
+            items[3],
+        ],
+    ]);
 
-        if (nextProps.items !== this.props.items) {
-            newState.animationState = AnimationState.SHOW_RESULT;
-            newState.rows = this._mapItemsToRows(nextProps.items);
+    const [animationState, setAnimationState] = useState(AnimationState.ENTER);
+    const prevItems = usePrevious(items);
+    const prevTestState = usePrevious(testState);
+    const [rows, setRows] = useState([]);
+
+
+    useEffect(() => {
+        if (prevItems !== items) {
+            setAnimationState(AnimationState.SHOW_RESULT);
         }
 
-        if (nextProps.testState !== this.props.testState) {
-            if (nextProps.testState === TestState.SELECT) {
-                newState.animationState = AnimationState.SHOW_NEW_VARIANTS;
+        if (testState !== prevTestState) {
+            if (testState === TestState.SELECT) {
+                setAnimationState(AnimationState.SHOW_NEW_VARIANTS);
             } else {
-                newState.animationState = AnimationState.SHOW_RESULT;
+                setAnimationState(AnimationState.SHOW_RESULT);
             }
         }
-
-        if (Object.keys(newState).length > 0) {
-            this.setState(newState);
-        }
-    }
-
-    _mapItemsToRows = (items) => {
-        return [
+        const rows = [
             [
                 items[0],
                 items[1],
@@ -66,81 +73,72 @@ class Variants extends React.Component {
             ],
         ];
 
-    };
+        setRows(rows);
+    }, [items]);
 
-
-    _handleStopAnimation = () => {
-        const {onMoveToNextTest} = this.props;
-        const {animationState} = this.state;
-
+    const _handleStopAnimation = () => {
         if (animationState === AnimationState.SHOW_RESULT) {
-            this.setState({
-                animationState: AnimationState.HIDE_OLD_VARIANTS
-            })
+            setAnimationState(AnimationState.HIDE_OLD_VARIANTS);
         } else if (animationState === AnimationState.HIDE_OLD_VARIANTS) {
             onMoveToNextTest();
         }
     };
 
-    render() {
-        const {testId, onSelect, onMoveToNextTest} = this.props;
-        const {animationState, rows} = this.state;
 
-        const currentAnimation = AnimationProperties[animationState];
-        console.log('STATE', {an: currentAnimation, animationState});
+    const currentAnimation = AnimationProperties[animationState];
+    console.log('STATE', {an: currentAnimation, animationState});
 
-        return (
-            <Spring
-                from={{opacity: 0}}
-                to={currentAnimation}
-                config={{
-                    // ...config.slow,
-                    ...(currentAnimation.config || {})
-                }}
-                onRest={this._handleStopAnimation}
-            >
-                {
-                    (props) => (
-                        <div
-                            className={style.variants}
-                        >
-                            {
-                                rows.map((row, rowIndex) => (
-                                    <div
-                                        key={rowIndex}
-                                        className={style.row}
-                                        data-row={rowIndex}
-                                    >
-                                        {
-                                            row.map(({value, state}, variantIndex) => (
-                                                    <Variant
-                                                        key={variantIndex}
-                                                        isDisabled={animationState === 'hideOldVariants'}
-                                                        value={value}
-                                                        state={state}
-                                                        onSelect={onSelect}
-                                                        valueStyle={props}
-                                                    />
-                                                )
+    return (
+        <Spring
+            from={{opacity: 0}}
+            to={currentAnimation}
+            config={{
+                // ...config.slow,
+                ...(currentAnimation.config || {})
+            }}
+            onRest={_handleStopAnimation}
+        >
+            {
+                (props) => (
+                    <div
+                        className={style.variants}
+                    >
+                        {
+                            rows.map((row, rowIndex) => (
+                                <div
+                                    key={rowIndex}
+                                    className={style.row}
+                                    data-row={rowIndex}
+                                >
+                                    {
+                                        row.map(({value, state}, variantIndex) => (
+                                                <Variant
+                                                    key={variantIndex}
+                                                    isDisabled={animationState === 'hideOldVariants'}
+                                                    value={value}
+                                                    state={state}
+                                                    onSelect={onSelect}
+                                                    valueStyle={props}
+                                                />
                                             )
-                                        }
-                                    </div>
-                                ))
-                            }
-                        </div>
-                    )
-                }
-            </Spring>
-        );
-    }
+                                        )
+                                    }
+                                </div>
+                            ))
+                        }
+                    </div>
+                )
+            }
+        </Spring>
+    );
 }
 
-Variants.propTypes = {
-    // state: PropTypes.oneOf(['enter', 'leave', 'showResult']),
-    items: PropTypes.array.isRequired,
-    onSelect: PropTypes.func.isRequired,
-};
-
-Variants.defaultProps = {};
+// Variants.propTypes = {
+//     // state: PropTypes.oneOf(['enter', 'leave', 'showResult']),
+//     items: PropTypes.array.isRequired,
+//     onSelect: PropTypes.func.isRequired,
+// };
+//
+// Variants.defaultProps = {};
 
 export default Variants;
