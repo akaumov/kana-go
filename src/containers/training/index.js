@@ -7,43 +7,37 @@ import TrainingDialog from "./training-dialog";
 
 import style from './style.module.scss';
 
-class TrainingPage extends React.Component {
-    _handleStartTraining = () => {
-        this.props.history.push('/training/start');
-    };
+const TrainingPage = (props) => {
+    const {dialogId, history} = props;
 
-    _handleTrainingDialogClosed = () => {
-        this.props.history.replace('/training');
-    };
+    const _handleStartTraining = () => history.push('/training/start');
+    const _handleTrainingDialogClosed = () => history.replace('/training');
 
-    render() {
-        const {dialogId} = this.props;
-        return (
-            <div className={style.trainingPage}>
-                <Header/>
-                <div className={style.content}>
-                    <h1 className={style.title}>Select training options</h1>
-                    <div className={style.optionsGroup}>
-                        <KanaSelector/>
-                        <button
-                            className={style.startButton}
-                            onClick={this._handleStartTraining}
-                        >
-                            Start
-                        </button>
-                    </div>
-                    {
-                        dialogId === 'start' &&
-                        <TrainingDialog
-                            values={{}}
-                            onClosed={this._handleTrainingDialogClosed}
-                        />
-                    }
+    return (
+        <div className={style.trainingPage}>
+            <Header/>
+            <div className={style.content}>
+                <h1 className={style.title}>Select training options</h1>
+                <div className={style.optionsGroup}>
+                    <KanaSelector/>
+                    <button
+                        className={style.startButton}
+                        onClick={_handleStartTraining}
+                    >
+                        Start
+                    </button>
                 </div>
+                {
+                    dialogId === 'start' &&
+                    <TrainingDialog
+                        values={{}}
+                        onClosed={_handleTrainingDialogClosed}
+                    />
+                }
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
 const mapRouterToProps = (TrainingPage) => (props) => {
     const {match} = props;
