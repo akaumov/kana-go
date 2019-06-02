@@ -9,9 +9,7 @@ import {ReactComponent as BackButton} from '../../../assets/icons/_ionicons_svg_
 const Header = (props) => {
     const {history} = props;
 
-    const _handleGoToHome = () => {
-        history.push('/');
-    };
+    const _handleGoToHome = () => history.replace('/');
 
     return (
         <nav className={style.header}>
