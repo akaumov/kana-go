@@ -1,64 +1,86 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import ScrollLock from 'react-scrolllock';
-import {Transition, Trail, animated} from 'react-spring/renderprops'
+import { useTransition, useSpring, animated } from 'react-spring';
+import { useWindowSize } from 'use-hooks';
 
 import Modal from "../../../components/modal";
 
 import style from './style.module.scss';
 
+const DIALOG_HEIGHT = 480;
+const DIALOG_WIDTH = 350;
 
-export class Slug extends React.PureComponent {
-    render() {
-        const {
-            children,
-            from = {opacity: 0, transform: 'translate3d(0,40px,0)'},
-            to = {opacity: 1, transform: 'translate3d(0,0px,0)'},
-            ...rest
-        } = this.props;
 
-        const result = React.Children.map(children, child => styles => {
-            const Component = animated[child.type] || animated(child.type)
-            const props = {
-                ...child.props,
-                style: {
-                    willChange: 'opacity, transform',
-                    ...child.props.style,
-                    ...styles,
-                },
-            }
-            return <Component {...props} />
-        });
-        return (
-            <Trail
-                native
-                {...rest}
-                items={result}
-                keys={result.map((_, i) => i)}
-                from={from}
-                to={to}
-                children={child => child}
-            />
-        )
+const _getStartPosition = (windowSize, openedItem) => {
+    if (!openedItem) {
+        return null;
     }
-}
+    const rect = openedItem.getBoundingClientRect();
 
-class CharacterCard extends React.Component {
-    render() {
-        const {characterType, character, onClosed} = this.props;
-        const {hiragana, katakana, romaji} = character;
+    return {
+        x: rect.left,
+        y: rect.top
+    }
+};
 
-        let mainSymbol = characterType === 'hiragana' ? hiragana : katakana;
-        let secondarySymbol = characterType === 'hiragana' ? katakana : hiragana;
+const _getTargetPosition = (windowSize) => {
+    return {
+        x: windowSize.width/2 - DIALOG_WIDTH/2,
+        y: windowSize.height/2 - DIALOG_HEIGHT/2,
+    }
+};
 
-        const characterTypeText = characterType === 'hiragana' ? 'Hiragana' : 'Katakana';
-        const secondaryCharacterTypeText = characterType === 'hiragana' ? 'Katakana' : 'Hiragana';
+function CharacterCard(props) {
+    const {isOpened, characterType, character, onClosed, openedItem} = props;
+    const {hiragana, katakana, romaji} = character;
 
-        return (
-            <Modal>
-                <ScrollLock>
-                    <div className={style.dialog}>
-                        <Slug>
+    // const [startPosition, setStartPosition] = useState(_getStartPosition(openedItem));
+    // const [targetPosition, setTargetPosition] = useState(_getTargetPosition(openedItem));
+
+
+    let mainSymbol = characterType === 'hiragana' ? hiragana : katakana;
+    let secondarySymbol = characterType === 'hiragana' ? katakana : hiragana;
+
+    const characterTypeText = characterType === 'hiragana' ? 'Hiragana' : 'Katakana';
+    const secondaryCharacterTypeText = characterType === 'hiragana' ? 'Katakana' : 'Hiragana';
+
+    let customStyle = {};
+    // if (startPosition) {
+        customStyle = {
+            position: 'fixed',
+            width: 65,
+            height: 65,
+            // left: startPosition.x,
+            // top: startPosition.y,
+        }
+    // }
+
+    const windowSize = useWindowSize();
+
+        console.log('windowSize', windowSize)
+
+    const transitions = useTransition(isOpened, null, {
+        from: {..._getStartPosition(windowSize, openedItem), width: 65, height: 65},
+        enter: {..._getTargetPosition(windowSize, openedItem), height: DIALOG_HEIGHT, width: DIALOG_WIDTH},
+        leave: {..._getStartPosition(windowSize, openedItem)}
+    });
+
+    return (
+        <Modal>
+            <ScrollLock>
+                {
+                    transitions.map(({ item, props, key }) => (
+                        <animated.div
+                            className={style.dialogTransforming}
+                            style={{
+                                ...customStyle,
+                                top: props.y,
+                                left: props.x,
+                                width: props.width,
+                                height: props.height
+                            }}
+                        >
                             <button
                                 className={style.closeButton}
                                 onClick={onClosed}
@@ -89,12 +111,13 @@ class CharacterCard extends React.Component {
                                     </button>
                                 </div>
                             </div>
-                        </Slug>
-                    </div>
-                </ScrollLock>
-            </Modal>
-        );
-    }
+                        </animated.div>
+                    ))
+                }
+
+            </ScrollLock>
+        </Modal>
+    );
 }
 
 CharacterCard.propTypes = {

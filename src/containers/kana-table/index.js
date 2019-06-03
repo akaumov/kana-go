@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {withRouter} from "react-router-dom";
 
 import kanaData from '../../kana_data';
@@ -11,42 +11,41 @@ import CharacterCard from "./character-card";
 import style from './style.module.scss';
 
 
-class KanaTablePage extends React.Component {
+const KanaTablePage = (props) => {
 
-    state = {
-        currentSection: null
-    };
+    const {
+        isOpenedFromHomePage,
+        characterType,
+        openedCharacter,
+        openedCharacterId,
+        history
+    } = props;
 
-    _handleClickItem = (itemId) => {
-        const {history, characterType} = this.props;
+    const [currentSection, setCurrentSection] = useState(null);
+    const [openedItem, setOpenedItem] = useState(null);
+
+    const _handleClickItem = (itemId, clickEvent) => {
+        setOpenedItem(clickEvent.target);
         history.push(`/kana-table/${characterType}/${itemId}`);
     };
 
-    _handleCharacterCardClosed = () => {
-        const {characterType, history} = this.props;
+    const _handleCharacterCardClosed = () => {
         history.replace(`/kana-table/${characterType}`);
     };
 
-    _handleChangeCharacterType = (characterType) => {
-        const {history} = this.props;
-        history.replace(`/kana-table/${characterType}`);
+    const _handleChangeCharacterType = (newCharacterType) => {
+        history.replace(`/kana-table/${newCharacterType}`);
     };
 
-    _handleChangeSectionState = (sectionIndex, state) => {
-        console.log('CHANGE', {sectionIndex, status: state});
+    const _handleChangeSectionState = (sectionIndex, state) => {
         if (state === SectionStates.FIXED || state === SectionStates.ORIGINAL) {
-            this.setState({
-                currentSection: kanaData[sectionIndex]
-            });
+            setCurrentSection(kanaData[sectionIndex]);
         }
     };
 
-    render() {
-        const {openedCharacter, characterType} = this.props;
-        const {currentSection} = this.state;
-
-        return (
-            <div className={style.kanaTablePage}>
+    return (
+        <div className={style.backdrop}>
+            <div className={isOpenedFromHomePage ? style.kanaTablePageAnimated : style.kanaTablePage}>
                 <Header
                     title={'Kana table'}
                 />
@@ -54,14 +53,15 @@ class KanaTablePage extends React.Component {
                     <TableHeader
                         key='table-header'
                         characterType={characterType}
-                        onChangeCharacterType={this._handleChangeCharacterType}
+                        onChangeCharacterType={_handleChangeCharacterType}
                         currentSectionName={currentSection && currentSection.name}
                     />
                     <Table
                         characterType={characterType}
+                        openedCharacterId={openedCharacterId}
                         tableData={kanaData}
-                        onClickItem={this._handleClickItem}
-                        onChangeSectionState={this._handleChangeSectionState}
+                        onClickItem={_handleClickItem}
+                        onChangeSectionState={_handleChangeSectionState}
                     />
                     {
                         openedCharacter &&
@@ -69,14 +69,15 @@ class KanaTablePage extends React.Component {
                             key={'character-card'}
                             characterType={characterType}
                             character={openedCharacter}
-                            onClosed={this._handleCharacterCardClosed}
+                            openedItem={openedItem}
+                            onClosed={_handleCharacterCardClosed}
                         />
                     }
                 </div>
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
 const mapRouterToProps = (KanaTablePage) => (props) => {
     const {match} = props;

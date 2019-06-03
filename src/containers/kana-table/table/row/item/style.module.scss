@@ -21,6 +21,10 @@
   &:hover {
     box-shadow:0 3px 6px 0 rgba(0,0,0,.1),0 1px 3px 0 rgba(0,0,0,.08)
   }
+
+  *{
+    pointer-events: none;
+  }
 }
 
 .mainSymbol {
@@ -42,4 +46,15 @@
 .romaji {
   display: inline-block;
   margin-right: 5px;
+}
+
+.itemOpened {
+  composes: item;
+  //opacity: 0;
+  pointer-events: none;
+
+  color: $accent-color;
+  * {
+    color: $accent-color;
+  }
 }

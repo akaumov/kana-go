@@ -8,17 +8,18 @@ import style from './style.module.scss';
 class Row extends React.Component {
     _handleClickItem = (itemId) => (e) => {
         e.stopPropagation();
-        this.props.onClickItem(itemId);
+        this.props.onClickItem(itemId, e);
     };
 
     render() {
-        const {characterType, items} = this.props;
+        const {characterType, items, openedCharacterId} = this.props;
         return (
             <div className={style.row}>
                 {
                     items.map((item, index) => (
                         <Item
                             key={index}
+                            isOpened={item.id === openedCharacterId}
                             characterType={characterType}
                             romaji={item.romaji}
                             katakana={item.katakana}

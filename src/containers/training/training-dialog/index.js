@@ -1,172 +1,57 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import ScrollLock from 'react-scrolllock';
 
-import kanaData from '../../../kana_data';
 import Modal from "../../../components/modal";
 
-import style from './style.module.scss';
+import {generateTests} from './testGenerator';
+import {TestState, VariantState} from './enums';
+
 import Variants from "./variants";
 
-import {TestState, VariantState} from './enums';
-import {Spring} from "react-spring/renderprops";
-
-const QuestionsDirection = Object.freeze({
-    FROM_ROMAJI: 'FROM_ROMAJI',
-    TO_ROMAJI: 'TO_ROMAJI',
-    BOTH: 'BOTH'
-});
-
-const MainSymbolAnimations = Object.freeze({
-    [TestState.ENTER]: {
-        props: {
-            opacity: 1
-        },
-        config: {
-            delay: 800
-        }
-    },
-    [TestState.SHOW_RESULT]: {
-        props: {
-            opacity: 1
-        }
-    },
-    [TestState.HIDE_OLD_TEST]: {
-        props: {
-            opacity: 0
-        }
-    },
-    [TestState.LEAVE]: {
-        props: {
-            opacity: 0
-        }
-    }
-});
+import style from './style.module.scss';
 
 
-class TrainingDialog extends React.Component {
+const selectedSectionIds = ['basic'];
+const tests = generateTests(selectedSectionIds, 20);
+const _mapTestToDisplayData = (test, currentAnswer) => {
 
-    constructor(props) {
-        super(props);
+    const variants = test.variants.map(variant => {
 
-        const selectedSectionIds = ['basic'];
-        const tests = this._generateTests(selectedSectionIds, 20);
-
-        this.state = {
-            tests,
-            answers: [],
-            currentTestIndex: 0,
-            currentTestState: TestState.SELECT,
-            currentTestDisplayData: this._mapTestToDisplayData(tests[0]),
-        };
-    }
-
-    _mapTestToDisplayData = (test, currentAnswer) => {
-
-        const variants = test.variants.map(variant => {
-
-            let variantState = VariantState.SELECT;
-            if (currentAnswer) {
-                variantState = VariantState.DISABLED;
-                if (variant === currentAnswer.rightAnswer) {
-                    variantState = VariantState.RIGHT;
-                } else if (variant === currentAnswer.selectedVariant) {
-                    variantState = VariantState.WRONG;
-                }
+        let variantState = VariantState.SELECT;
+        if (currentAnswer) {
+            variantState = VariantState.DISABLED;
+            if (variant === currentAnswer.rightAnswer) {
+                variantState = VariantState.RIGHT;
+            } else if (variant === currentAnswer.selectedVariant) {
+                variantState = VariantState.WRONG;
             }
-
-            return {
-                value: variant,
-                state: variantState
-            }
-        });
+        }
 
         return {
-            ...test,
-            variants
+            value: variant,
+            state: variantState
         }
-    };
+    });
 
-    _generateTests = (selectedSectionIds, limit, questionsDirections) => {
+    return {
+        ...test,
+        variants
+    }
+};
 
-        const characters = this._getCharactersSet(selectedSectionIds);
-        const tests = [];
-        const questionCharacterType = 'romaji';
-        const variantCharacterType = 'katakana';
+function TrainingDialog(props) {
 
-        while (tests.length < limit) {
-            const randomIndex = Math.round(Math.random() * (characters.length - 1));
+    const {onClosed} = props;
 
-            const questionCharacter = characters[randomIndex];
-            const isQuestionExist = tests.find(test => test.question === questionCharacter[questionCharacterType]);
-
-            if (isQuestionExist) {
-                continue;
-            }
-
-            const test = {
-                question: questionCharacter[questionCharacterType],
-                answer: questionCharacter[variantCharacterType],
-                variants: this._generateVariants(selectedSectionIds, questionCharacter, variantCharacterType)
-            };
-
-            tests.push(test);
-        }
-
-        return tests;
-    };
+    const [answers, setAnswers] = useState([]);
+    const [currentTestIndex, setCurrentTestIndex] = useState(0);
+    const [currentTestState, setCurrentTestState] = useState(TestState.SELECT);
+    const [currentTestDisplayData, setCurrentTestDisplayData] = useState(_mapTestToDisplayData(tests[0]));
 
 
-    _getCharactersSet = (selectedSectionsIds) => {
-        const characters = [];
-
-        selectedSectionsIds.forEach(sectionId => {
-            const section = kanaData.find(section => section.id === sectionId);
-            section.items.forEach(rowItems => {
-                rowItems.forEach(character => character.id && characters.push(character));
-            });
-        });
-
-        return characters;
-    };
-
-    _generateVariants = (sectionsIds, currentCharacter, variantCharacterType) => {
-
-        const NUMBER_OF_VARIANTS = 4;
-
-        const randomCharactersSet = this._getCharactersSet(['basic', 'handakuon_dakuon', 'yoon']);
-        const randomCharacters = [];
-
-        while (randomCharacters.length < 3) {
-            const randomCharacter = this._getRandomCharacter(randomCharactersSet);
-
-            if (randomCharacter.id === currentCharacter.id) {
-                continue;
-            }
-
-            const isCharacterAlreadyExist = randomCharacters.find(character => character.id === randomCharacter.id);
-            if (isCharacterAlreadyExist) {
-                continue;
-            }
-
-            randomCharacters.push(randomCharacter);
-        }
-
-        const randomIndex = Math.round(Math.random() * (NUMBER_OF_VARIANTS - 1));
-
-        randomCharacters.splice(randomIndex, 0, currentCharacter);
-        return randomCharacters.map(character => character[variantCharacterType])
-    };
-
-
-    _getRandomCharacter = (charactersSet) => {
-        const randomIndex = Math.round(Math.random() * (charactersSet.length - 1));
-        return charactersSet[randomIndex];
-    };
-
-    _moveToNextTest = () => {
-        const {tests} = this.state;
-        const nextTestIndex = this.state.currentTestIndex + 1;
+    const _moveToNextTest = () => {
+        const nextTestIndex = currentTestIndex + 1;
 
         if (nextTestIndex >= tests.length) {
             alert('Complete');
@@ -174,19 +59,16 @@ class TrainingDialog extends React.Component {
         }
 
         const nextTest = tests[nextTestIndex];
-        this.setState({
-            currentTestState: TestState.SELECT,
-            currentTestIndex: nextTestIndex,
-            currentTestDisplayData: this._mapTestToDisplayData(nextTest)
-        })
+        setCurrentTestIndex(nextTestIndex);
+        setCurrentTestState(TestState.SELECT);
+        setCurrentTestDisplayData(_mapTestToDisplayData(nextTest));
     };
 
-    _handleSelectVariant = (selectedVariant) => {
+    const _handleSelectVariant = (selectedVariant) => {
 
-        const {currentTestIndex, tests} = this.state;
         const test = tests[currentTestIndex];
 
-        const newAnswers = this.state.answers.slice();
+        const newAnswers = answers.slice();
 
         const isAnswerRight = test.answer === selectedVariant;
 
@@ -197,84 +79,67 @@ class TrainingDialog extends React.Component {
         };
         newAnswers.push(answer);
 
-        this.setState({
-            currentTestState: TestState.SHOW_RESULT,
-            answers: newAnswers,
-            currentTestDisplayData: this._mapTestToDisplayData(test, answer)
-        });
+        setCurrentTestState(TestState.SHOW_RESULT);
+        setCurrentTestDisplayData(_mapTestToDisplayData(test, answer));
+        setAnswers(newAnswers);
 
         if (isAnswerRight) {
             // setTimeout(this._moveToNextTest, 1000);
         }
     };
 
-    render() {
-        const {onClosed} = this.props;
-        const {currentTestState, currentTestDisplayData, currentTestIndex} = this.state;
+    const {question, variants} = currentTestDisplayData;
 
-        const {question, variants} = currentTestDisplayData;
-
-        return (
-            <Modal showBackground={false}>
-                <ScrollLock>
-                    <div className={style.background}>
-                        <div className={style.dialog}>
-                            <button
-                                className={style.closeButton}
-                                onClick={onClosed}
-                            >
-                                <i className="ion ion-ios-close"/>
-                            </button>
-                            <Spring
-                                key={question}
-                                from={{transform: "translate3d(0,20px,0)", opacity: 0}}
-                                to={{transform: "translate3d(0,0px,0)", opacity: 1}}
+    return (
+        <Modal showBackground={false}>
+            <ScrollLock>
+                <div className={style.background}>
+                    <div className={style.dialog}>
+                        <button
+                            className={style.closeButton}
+                            onClick={onClosed}
+                        >
+                            <i className="ion ion-ios-close"/>
+                        </button>
+                        <div className={style.mainInfo}>
+                            <div
+                                className={question.length === 1 ? style.mainSymbol : style.mainSymbolYoon}
+                                style={props}
                             >
                                 {
-                                    (props) => (
-                                        <div className={style.mainInfo}>
-                                            <div
-                                                className={question.length === 1 ? style.mainSymbol : style.mainSymbolYoon}
-                                                style={props}
-                                            >
-                                                {
-                                                    question
-                                                }
-                                            </div>
-                                        </div>
-                                    )
-                                }
-                            </Spring>
-                            <div className={style.skipContainer}>
-                                <button>I don't know</button>
-
-                            </div>
-                            <div className={style.bottomInfo}>
-                                <Variants
-                                    testState={currentTestState}
-                                    testId={currentTestIndex}
-                                    items={variants}
-                                    onSelect={this._handleSelectVariant}
-                                    onMoveToNextTest={this._moveToNextTest}
-                                />
-                                {
-                                    false &&
-                                    // currentAnswer &&
-                                    // !currentAnswer.isRight &&
-                                    <button
-                                        className={style.continueButton}
-                                        onClick={this._moveToNextTest}
-                                    >
-                                        Continue
-                                    </button>
+                                    question
                                 }
                             </div>
                         </div>
+                        <div className={style.skipContainer}>
+                            <button>I don't know</button>
+
+                        </div>
+                        <div className={style.bottomInfo}>
+                            <Variants
+                                testState={currentTestState}
+                                testId={currentTestIndex}
+                                items={variants}
+                                onSelect={_handleSelectVariant}
+                                onMoveToNextTest={_moveToNextTest}
+                            />
+                            {
+                                false &&
+                                // currentAnswer &&
+                                // !currentAnswer.isRight &&
+                                <button
+                                    className={style.continueButton}
+                                    onClick={_moveToNextTest}
+                                >
+                                    Continue
+                                </button>
+                            }
+                        </div>
                     </div>
-                </ScrollLock>
-            </Modal>
-        );
-    }
+                </div>
+            </ScrollLock>
+        </Modal>
+    );
 }
 
 TrainingDialog.propTypes = {

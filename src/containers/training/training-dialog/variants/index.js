@@ -53,6 +53,7 @@ function Variants(props) {
     useEffect(() => {
         if (prevItems !== items) {
             setAnimationState(AnimationState.SHOW_RESULT);
+            setRows(mapItemsToRows(items));
         }
 
         if (testState !== prevTestState) {
@@ -62,18 +63,7 @@ function Variants(props) {
                 setAnimationState(AnimationState.SHOW_RESULT);
             }
         }
-        const rows = [
-            [
-                items[0],
-                items[1],
-            ],
-            [
-                items[2],
-                items[3],
-            ],
-        ];
 
-        setRows(rows);
     }, [items]);
 
     const _handleStopAnimation = () => {
@@ -86,7 +76,6 @@ function Variants(props) {
 
 
     const currentAnimation = AnimationProperties[animationState];
-    console.log('STATE', {an: currentAnimation, animationState});
 
     return (
         <Spring

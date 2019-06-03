@@ -2,18 +2,31 @@
 
 @keyframes show-animation {
   0% {
-    transform: scale(0.8);
-    @include card4();
-    border-radius: 10px;
+    transform: scale(0.95);
+    //@include card4();
+    //border-radius: 10px;
     overflow: hidden;
+    opacity: 0.6;
   }
 
   100% {
     transform: scale(1);
     box-shadow: none;
-    border-radius: 0;
+    //border-radius: 0;
     overflow: visible;
+    opacity: 1;
   }
+}
+
+.backdrop {
+  width: 100%;
+  min-height: 100%;
+
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 
@@ -27,11 +40,16 @@
   background: white;
 
   z-index: 1000;
+}
+
+.kanaTablePageAnimated {
+  composes: kanaTablePage;
 
   animation-name: show-animation;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
-  animation-duration: 500ms;
+  animation-duration: 350ms;
+  will-change: transform, border-radius, box-shadow;
 }
 
 .content {
