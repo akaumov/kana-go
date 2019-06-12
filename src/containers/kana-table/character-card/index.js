@@ -30,7 +30,7 @@ function CharacterCard(props) {
         transformOrigin: '0 0'
     };
 
-    const [containerTransitions] = useAnimation(isOpened, character.id, onClosed);
+    const [containerTransitions, extraInfoTransitions] = useAnimation(isOpened, character.id, onClosed);
 
     return containerTransitions.map(({item: isOpened, props, key, state}) => (
             isOpened &&
@@ -73,17 +73,27 @@ function CharacterCard(props) {
                                     {characterTypeText}
                                 </div>
                             </div>
-                            <div className={style.bottomInfo}>
-                                <div className={style.oneToOne}>
-                                    <span>{secondaryCharacterTypeText}</span>
-                                    <i className="ion ion-ios-arrow-round-forward"/>
-                                    {secondarySymbol}
-                                </div>
+                            {
+                                extraInfoTransitions.map(({item: showExtraInfo, props, key, state}) => (
+                                    showExtraInfo &&
+                                    (console.log('STATE2', {showExtraInfo, props, key, state}) || true) &&
+                                    <animated.div
+                                        key={key}
+                                        className={style.bottomInfo}
+                                        style={props}
+                                    >
+                                        <div className={style.oneToOne}>
+                                            <span>{secondaryCharacterTypeText}</span>
+                                            <i className="ion ion-ios-arrow-round-forward"/>
+                                            {secondarySymbol}
+                                        </div>
 
-                                <button className={style.playSoundButton}>
-                                    <i className="ion ion-ios-volume-high"/>
-                                </button>
-                            </div>
+                                        <button className={style.playSoundButton}>
+                                            <i className="ion ion-ios-volume-high"/>
+                                        </button>
+                                    </animated.div>
+                                ))
+                            }
                         </div>
                     </animated.div>
                 </animated.div>

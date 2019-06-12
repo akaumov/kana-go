@@ -13,6 +13,7 @@ $desktop-dialog-height: 480px;
   composes: backdrop from '../../../components/modal/style.module.scss';
   animation: none;
   background: none;
+  will-change: background;
 }
 
 .dialog {
@@ -35,7 +36,8 @@ $desktop-dialog-height: 480px;
 .dialogTransforming {
   composes: dialog;
   overflow: hidden;
-  will-change: transform, width, height;
+  will-change: transform;
+  pointer-events: none;
 }
 
 .closeButton {
