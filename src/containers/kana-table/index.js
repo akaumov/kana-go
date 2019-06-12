@@ -9,6 +9,7 @@ import Table, {SectionStates} from "./table";
 import CharacterCard from "./character-card";
 
 import style from './style.module.scss';
+import {trace} from "../../utils";
 
 
 const KanaTablePage = (props) => {
@@ -22,10 +23,8 @@ const KanaTablePage = (props) => {
     } = props;
 
     const [currentSection, setCurrentSection] = useState(null);
-    const [openedItem, setOpenedItem] = useState(null);
 
-    const _handleClickItem = (itemId, clickEvent) => {
-        setOpenedItem(clickEvent.target);
+    const _handleClickItem = (itemId) => {
         history.push(`/kana-table/${characterType}/${itemId}`);
     };
 
@@ -64,12 +63,11 @@ const KanaTablePage = (props) => {
                         onChangeSectionState={_handleChangeSectionState}
                     />
                     {
-                        openedCharacter &&
+                        openedCharacterId &&
                         <CharacterCard
                             key={'character-card'}
                             characterType={characterType}
                             character={openedCharacter}
-                            openedItem={openedItem}
                             onClosed={_handleCharacterCardClosed}
                         />
                     }

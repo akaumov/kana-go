@@ -10,6 +10,7 @@ class Modal extends React.Component {
         super(props);
         this.el = document.createElement('div');
         this.el.className = style.backdrop;
+        this.el.onclick = props.onClickBackdrop;
     }
 
     componentDidMount() {

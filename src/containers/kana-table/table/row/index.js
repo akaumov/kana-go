@@ -7,8 +7,7 @@ import style from './style.module.scss';
 
 class Row extends React.Component {
     _handleClickItem = (itemId) => (e) => {
-        e.stopPropagation();
-        this.props.onClickItem(itemId, e);
+        this.props.onClickItem(itemId);
     };
 
     render() {
@@ -21,6 +20,7 @@ class Row extends React.Component {
                             key={index}
                             isOpened={item.id === openedCharacterId}
                             characterType={characterType}
+                            id={item.id}
                             romaji={item.romaji}
                             katakana={item.katakana}
                             hiragana={item.hiragana}

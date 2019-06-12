@@ -7,6 +7,7 @@ function Item(props) {
     const {
         isOpened,
         characterType,
+        id,
         romaji,
         katakana,
         hiragana,
@@ -14,11 +15,9 @@ function Item(props) {
     } = props;
 
     const handleClick = (e) => {
-        console.log('E', e)
-        console.log('E', e.nativeEvent)
+        e.stopPropagation();
         onClick(e);
     };
-
 
     const mainSymbol = characterType === 'hiragana' ? hiragana : katakana;
     const secondarySymbol = characterType === 'hiragana' ? katakana : hiragana;
@@ -33,6 +32,7 @@ function Item(props) {
 
     return (
         <div
+            id={`table-item-${id}`}
             className={isOpened ? style.itemOpened : style.item}
             onClick={handleClick}
         >

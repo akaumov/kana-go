@@ -28,23 +28,12 @@ $desktop-dialog-height: 480px;
   padding-bottom: 30px;
   overflow: hidden;
   border-radius: 10px;
-
-  animation-name: show-animation;
-  animation-timing-function: ease-out;
-  animation-fill-mode: forwards;
-  animation-duration: 50ms;
 }
 
 .dialogTransforming {
   composes: dialog;
-  padding: 0;
   overflow: hidden;
-  pointer-events: none;
-  will-change: width, height;
-
-  * {
-    display: none !important;
-  }
+  will-change: transform, width, height;
 }
 
 .closeButton {
