@@ -3,14 +3,16 @@
 $desktop-dialog-width: 350px;
 $desktop-dialog-height: 480px;
 
-@keyframes show-animation {
-  0% {
-    transform: scale(0.8);
-  }
+.defaultBackdrop {
+  composes: backdrop from '../../../components/modal/style.module.scss';
+  animation: none;
+  background: none;
+}
 
-  100% {
-    transform: scale(1);
-  }
+.backdrop {
+  composes: backdrop from '../../../components/modal/style.module.scss';
+  animation: none;
+  background: none;
 }
 
 .dialog {
@@ -147,19 +149,6 @@ $desktop-dialog-height: 480px;
   color: $accent-color;
 }
 
-@keyframes show-animation-mobile {
-  0% {
-    transform: scale(0.8);
-    border-radius: 20px;
-  }
-
-  100% {
-    transform: scale(1);
-    border-radius: 0;
-  }
-}
-
-
 @media (max-width: ($desktop-dialog-width + 100px)), (max-height: ($desktop-dialog-height + 100px)) {
   .dialog {
     width: 100%;
@@ -167,8 +156,5 @@ $desktop-dialog-height: 480px;
     border-radius: 0;
     position: fixed;
     top: 0;
-
-    animation-name: show-animation-mobile;
-    animation-duration: 200ms;
   }
 }

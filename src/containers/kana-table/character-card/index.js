@@ -7,35 +7,8 @@ import {useWindowSize} from 'use-hooks';
 import Modal from "../../../components/modal";
 
 import style from './style.module.scss';
-import {trace} from "../../../utils";
+import useAnimation from "./animation";
 
-const DIALOG_HEIGHT = 480;
-const DIALOG_WIDTH = 350;
-
-
-const _getStartPosition = (windowSize, openedItem) => {
-    if (!openedItem) {
-        return null;
-    }
-    const rect = openedItem.getBoundingClientRect();
-
-    return trace({
-        x: rect.left,
-        y: rect.top
-    }, 'MY')
-};
-
-
-const _getStartScale = () => {
-    return `scale(${65 / DIALOG_WIDTH}, ${65 / DIALOG_HEIGHT})`;
-};
-
-const _getTargetPosition = (windowSize) => {
-    return {
-        x: windowSize.width / 2 - DIALOG_WIDTH / 2,
-        y: windowSize.height / 2 - DIALOG_HEIGHT / 2,
-    }
-};
 
 function CharacterCard(props) {
 
@@ -50,82 +23,72 @@ function CharacterCard(props) {
     const characterTypeText = characterType === 'hiragana' ? 'Hiragana' : 'Katakana';
     const secondaryCharacterTypeText = characterType === 'hiragana' ? 'Katakana' : 'Hiragana';
 
-    const _handleClose = () => {
-        setIsOpened(false);
-    };
+    const _handleClose = () => setIsOpened(false);
 
     const customStyle = {
         position: 'fixed',
         transformOrigin: '0 0'
     };
 
-    const openedItem = document.getElementById(`table-item-${character.id}`);
-    const windowSize = useWindowSize();
-    const transitionConfig = {
-        onRest: () => !isOpened && onClosed(),
-        from: {
-            ..._getStartPosition(windowSize, openedItem),
-            transform: `scale(${65 / DIALOG_WIDTH}, ${65 / DIALOG_HEIGHT})`
-        },
-        enter: {..._getTargetPosition(windowSize, openedItem), transform: 'scale(1,1)'},
-        leave: {
-            ..._getStartPosition(windowSize, openedItem),
-            transform: `scale(${65 / DIALOG_WIDTH}, ${65 / DIALOG_HEIGHT})`
-        },
+    const [containerTransitions] = useAnimation(isOpened, character.id, onClosed);
 
-    };
-
-    const transitions = useTransition(isOpened, null, transitionConfig);
-
-    return (
-        transitions.map(({item: isOpened, props, key}) => (
+    return containerTransitions.map(({item: isOpened, props, key, state}) => (
             isOpened &&
+            (console.log('STATE', {isOpened, props, key, state}) || true) &&
             <Modal
+                key={key}
                 onClickBackdrop={_handleClose}
+                backdropClass={style.defaultBackdrop}
             >
                 <animated.div
-                    className={style.dialogTransforming}
+                    className={style.backdrop}
                     style={{
-                        ...customStyle,
-                        top: props.y,
-                        left: props.x,
-                        transform: props.transform
+                        background: props.backdropBackground
                     }}
                 >
-                    <button
-                        className={style.closeButton}
-                        onClick={_handleClose}
+                    <animated.div
+                        className={style.dialogTransforming}
+                        style={{
+                            ...customStyle,
+                            top: props.y,
+                            left: props.x,
+                            transform: props.transform
+                        }}
                     >
-                        <i className="ion ion-ios-close"/>
-                    </button>
-                    <div className={style.content}>
-                        <div className={style.mainInfo}>
-                            <div className={mainSymbol.length === 1 ? style.mainSymbol : style.mainSymbolYoon}>
-                                {mainSymbol}
+                        <button
+                            className={style.closeButton}
+                            onClick={_handleClose}
+                        >
+                            <i className="ion ion-ios-close"/>
+                        </button>
+                        <div className={style.content}>
+                            <div className={style.mainInfo}>
+                                <div className={mainSymbol.length === 1 ? style.mainSymbol : style.mainSymbolYoon}>
+                                    {mainSymbol}
+                                </div>
+                                <div className={style.romaji}>
+                                    {character.romaji}
+                                </div>
+                                <div className={style.characterType}>
+                                    {characterTypeText}
+                                </div>
                             </div>
-                            <div className={style.romaji}>
-                                {character.romaji}
-                            </div>
-                            <div className={style.characterType}>
-                                {characterTypeText}
-                            </div>
-                        </div>
-                        <div className={style.bottomInfo}>
-                            <div className={style.oneToOne}>
-                                <span>{secondaryCharacterTypeText}</span>
-                                <i className="ion ion-ios-arrow-round-forward"/>
-                                {secondarySymbol}
-                            </div>
+                            <div className={style.bottomInfo}>
+                                <div className={style.oneToOne}>
+                                    <span>{secondaryCharacterTypeText}</span>
+                                    <i className="ion ion-ios-arrow-round-forward"/>
+                                    {secondarySymbol}
+                                </div>
 
-                            <button className={style.playSoundButton}>
-                                <i className="ion ion-ios-volume-high"/>
-                            </button>
+                                <button className={style.playSoundButton}>
+                                    <i className="ion ion-ios-volume-high"/>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </animated.div>
                 </animated.div>
             </Modal>
-        ))
-
+        )
     );
 }
 

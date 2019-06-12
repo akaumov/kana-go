@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 import style from './style.module.scss';
 
@@ -9,7 +10,7 @@ class Modal extends React.Component {
     constructor(props) {
         super(props);
         this.el = document.createElement('div');
-        this.el.className = style.backdrop;
+        this.el.className = props.backdropClass;
         this.el.onclick = props.onClickBackdrop;
     }
 
@@ -28,5 +29,13 @@ class Modal extends React.Component {
         );
     }
 }
+
+Modal.propTypes = {
+    backdrop: PropTypes.string,
+};
+
+Modal.defaultProps = {
+    backdrop: style.backdropClass
+};
 
 export default Modal;
