@@ -38,12 +38,11 @@ const _getTargetPosition = (windowSize) => {
 };
 
 function CharacterCard(props) {
-    const {isOpened, characterType, character, onClosed} = props;
+
+    const {characterType, character, onClosed} = props;
     const {hiragana, katakana, romaji} = character;
 
-    // const [startPosition, setStartPosition] = useState(_getStartPosition(openedItem));
-    // const [targetPosition, setTargetPosition] = useState(_getTargetPosition(openedItem));
-
+    const [isOpened, setIsOpened] = useState(!!props.isOpened);
 
     let mainSymbol = characterType === 'hiragana' ? hiragana : katakana;
     let secondarySymbol = characterType === 'hiragana' ? katakana : hiragana;
@@ -51,81 +50,82 @@ function CharacterCard(props) {
     const characterTypeText = characterType === 'hiragana' ? 'Hiragana' : 'Katakana';
     const secondaryCharacterTypeText = characterType === 'hiragana' ? 'Katakana' : 'Hiragana';
 
-    let customStyle = {};
-    // if (startPosition) {
-    customStyle = {
+    const _handleClose = () => {
+        setIsOpened(false);
+    };
+
+    const customStyle = {
         position: 'fixed',
         transformOrigin: '0 0'
     };
-    // }
 
     const openedItem = document.getElementById(`table-item-${character.id}`);
     const windowSize = useWindowSize();
     const transitionConfig = {
-        // config: config.slow,
-        from: {..._getStartPosition(windowSize, openedItem), transform: `scale(${65 / DIALOG_WIDTH}, ${65 / DIALOG_HEIGHT})`},
+        onRest: () => !isOpened && onClosed(),
+        from: {
+            ..._getStartPosition(windowSize, openedItem),
+            transform: `scale(${65 / DIALOG_WIDTH}, ${65 / DIALOG_HEIGHT})`
+        },
         enter: {..._getTargetPosition(windowSize, openedItem), transform: 'scale(1,1)'},
-        leave: {..._getStartPosition(windowSize, openedItem), transform: `scale(${65 / DIALOG_WIDTH}, ${65 / DIALOG_HEIGHT})`}
-    };
+        leave: {
+            ..._getStartPosition(windowSize, openedItem),
+            transform: `scale(${65 / DIALOG_WIDTH}, ${65 / DIALOG_HEIGHT})`
+        },
 
-    trace(openedItem, 'openedItem')
-    trace(windowSize, 'windowSize')
-    trace(transitionConfig, 'transitionConfig')
+    };
 
     const transitions = useTransition(isOpened, null, transitionConfig);
 
     return (
-        <Modal
-            onClickBackdrop={onClosed}
-        >
-            {/*<ScrollLock>*/}
-            {
-                transitions.map(({item, props, key}) => (
-                    <animated.div
-                        className={style.dialogTransforming}
-                        style={{
-                            ...customStyle,
-                            top: props.y,
-                            left: props.x,
-                            transform: props.transform
-                        }}
+        transitions.map(({item: isOpened, props, key}) => (
+            isOpened &&
+            <Modal
+                onClickBackdrop={_handleClose}
+            >
+                <animated.div
+                    className={style.dialogTransforming}
+                    style={{
+                        ...customStyle,
+                        top: props.y,
+                        left: props.x,
+                        transform: props.transform
+                    }}
+                >
+                    <button
+                        className={style.closeButton}
+                        onClick={_handleClose}
                     >
-                        <button
-                            className={style.closeButton}
-                            onClick={onClosed}
-                        >
-                            <i className="ion ion-ios-close"/>
-                        </button>
-                        <div className={style.content}>
-                            <div className={style.mainInfo}>
-                                <div className={mainSymbol.length === 1 ? style.mainSymbol : style.mainSymbolYoon}>
-                                    {mainSymbol}
-                                </div>
-                                <div className={style.romaji}>
-                                    {character.romaji}
-                                </div>
-                                <div className={style.characterType}>
-                                    {characterTypeText}
-                                </div>
+                        <i className="ion ion-ios-close"/>
+                    </button>
+                    <div className={style.content}>
+                        <div className={style.mainInfo}>
+                            <div className={mainSymbol.length === 1 ? style.mainSymbol : style.mainSymbolYoon}>
+                                {mainSymbol}
                             </div>
-                            <div className={style.bottomInfo}>
-                                <div className={style.oneToOne}>
-                                    <span>{secondaryCharacterTypeText}</span>
-                                    <i className="ion ion-ios-arrow-round-forward"/>
-                                    {secondarySymbol}
-                                </div>
-
-                                <button className={style.playSoundButton}>
-                                    <i className="ion ion-ios-volume-high"/>
-                                </button>
+                            <div className={style.romaji}>
+                                {character.romaji}
+                            </div>
+                            <div className={style.characterType}>
+                                {characterTypeText}
                             </div>
                         </div>
-                    </animated.div>
-                ))
-            }
+                        <div className={style.bottomInfo}>
+                            <div className={style.oneToOne}>
+                                <span>{secondaryCharacterTypeText}</span>
+                                <i className="ion ion-ios-arrow-round-forward"/>
+                                {secondarySymbol}
+                            </div>
 
-            {/*</ScrollLock>*/}
-        </Modal>
+                            <button className={style.playSoundButton}>
+                                <i className="ion ion-ios-volume-high"/>
+                            </button>
+                        </div>
+                    </div>
+                </animated.div>
+            </Modal>
+        ))
+
     );
 }
 

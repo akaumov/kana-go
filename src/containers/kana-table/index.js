@@ -63,8 +63,9 @@ const KanaTablePage = (props) => {
                         onChangeSectionState={_handleChangeSectionState}
                     />
                     {
-                        openedCharacterId &&
+                        openedCharacter &&
                         <CharacterCard
+                            isOpened={!!openedCharacterId}
                             key={'character-card'}
                             characterType={characterType}
                             character={openedCharacter}
