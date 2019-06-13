@@ -4,8 +4,11 @@ import {animated} from 'react-spring';
 
 import Modal from "../../../components/modal";
 
-import style from './style.module.scss';
 import useAnimation from "./animation";
+import useAudio from './useAudio';
+
+import style from './style.module.scss';
+import PlaySoundButton from "./play-sound-button";
 
 
 function CharacterCard(props) {
@@ -14,12 +17,12 @@ function CharacterCard(props) {
     const {hiragana, katakana, romaji} = character;
 
     const [isOpened, setIsOpened] = useState(!!props.isOpened);
+    const [isSoundPlaying, togglePlayAudio] = useAudio(character.sound);
 
     const _handlePlaySound = (characterId) => (e) => {
         e.stopPropagation();
         e.preventDefault();
-        const sound = document.getElementById(`sound-${characterId}`);
-        sound && sound.play();
+        togglePlayAudio();
     };
 
     let mainSymbol = characterType === 'hiragana' ? hiragana : katakana;
@@ -35,16 +38,12 @@ function CharacterCard(props) {
         transformOrigin: '0 0'
     };
 
-    console.log('animate', animate)
-
     const [containerTransitions, extraInfoTransitions] = useAnimation(isOpened, character.id, onClosed, !animate);
 
     return containerTransitions.map(({item: isOpened, props, key, state}) => (
             isOpened &&
-            (console.log('STATE', {isOpened, props, key, state}) || true) &&
             <Modal
                 key={key}
-                onClickBackdrop={_handleClose}
                 backdropClass={style.defaultBackdrop}
             >
                 <animated.div
@@ -88,7 +87,6 @@ function CharacterCard(props) {
                             {
                                 extraInfoTransitions.map(({item: showExtraInfo, props, key, state}) => (
                                     showExtraInfo &&
-                                    (console.log('STATE2', {showExtraInfo, props, key, state}) || true) &&
                                     <animated.div
                                         key={key}
                                         className={style.bottomInfo}
@@ -99,13 +97,10 @@ function CharacterCard(props) {
                                             <i className="ion ion-ios-arrow-round-forward"/>
                                             {secondarySymbol}
                                         </div>
-
-                                        <button
-                                            className={style.playSoundButton}
+                                        <PlaySoundButton
+                                            isSoundPlaying={isSoundPlaying}
                                             onClick={_handlePlaySound(character.id)}
-                                        >
-                                            <i className="ion ion-ios-volume-high"/>
-                                        </button>
+                                        />
                                     </animated.div>
                                 ))
                             }

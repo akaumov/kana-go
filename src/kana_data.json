@@ -45,31 +45,36 @@
           "id": "ka",
           "hiragana": "か",
           "katakana": "カ",
-          "romaji": "ka"
+          "romaji": "ka",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ka.mp3"
         },
         {
           "id": "ki",
           "hiragana": "き",
           "katakana": "キ",
-          "romaji": "ki"
+          "romaji": "ki",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ki.mp3"
         },
         {
           "id": "ku",
           "hiragana": "く",
           "katakana": "ク",
-          "romaji": "ku"
+          "romaji": "ku",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ku.mp3"
         },
         {
           "id": "ke",
           "hiragana": "け",
           "katakana": "ケ",
-          "romaji": "ke"
+          "romaji": "ke",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ke.mp3"
         },
         {
           "id": "ko",
           "hiragana": "こ",
           "katakana": "コ",
-          "romaji": "ko"
+          "romaji": "ko",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ko.mp3"
         }
       ],
       [
@@ -77,31 +82,36 @@
           "id": "sa",
           "hiragana": "さ",
           "katakana": "サ",
-          "romaji": "sa"
+          "romaji": "sa",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/sa.mp3"
         },
         {
           "id": "shi",
           "hiragana": "し",
           "katakana": "シ",
-          "romaji": "shi"
+          "romaji": "shi",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/si.mp3"
         },
         {
           "id": "su",
           "hiragana": "す",
           "katakana": "ス",
-          "romaji": "su"
+          "romaji": "su",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/su.mp3"
         },
         {
           "id": "se",
           "hiragana": "せ",
           "katakana": "セ",
-          "romaji": "se"
+          "romaji": "se",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/se.mp3"
         },
         {
           "id": "so",
           "hiragana": "そ",
           "katakana": "ソ",
-          "romaji": "so"
+          "romaji": "so",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/so.mp3"
         }
       ],
       [
@@ -109,31 +119,36 @@
           "id": "ta",
           "hiragana": "た",
           "katakana": "タ",
-          "romaji": "ta"
+          "romaji": "ta",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ta.mp3"
         },
         {
           "id": "chi",
           "hiragana": "ち",
           "katakana": "チ",
-          "romaji": "chi"
+          "romaji": "chi",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ti.mp3"
         },
         {
           "id": "tsu",
           "hiragana": "つ",
           "katakana": "ツ",
-          "romaji": "tsu"
+          "romaji": "tsu",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/tu.mp3"
         },
         {
           "id": "te",
           "hiragana": "て",
           "katakana": "テ",
-          "romaji": "te"
+          "romaji": "te",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/te.mp3"
         },
         {
           "id": "to",
           "hiragana": "と",
           "katakana": "ト",
-          "romaji": "to"
+          "romaji": "to",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/to.mp3"
         }
       ],
       [
@@ -141,31 +156,36 @@
           "id": "na",
           "hiragana": "な",
           "katakana": "ナ",
-          "romaji": "na"
+          "romaji": "na",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/na.mp3"
         },
         {
           "id": "ni",
           "hiragana": "に",
           "katakana": "ニ",
-          "romaji": "ni"
+          "romaji": "ni",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ni.mp3"
         },
         {
           "id": "nu",
           "hiragana": "ぬ",
           "katakana": "ヌ",
-          "romaji": "nu"
+          "romaji": "nu",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/nu.mp3"
         },
         {
           "id": "ne",
           "hiragana": "ね",
           "katakana": "ネ",
-          "romaji": "ne"
+          "romaji": "ne",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ne.mp3"
         },
         {
           "id": "no",
           "hiragana": "の",
           "katakana": "ノ",
-          "romaji": "no"
+          "romaji": "no",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/no.mp3"
         }
       ],
       [
@@ -173,31 +193,36 @@
           "id": "ha",
           "hiragana": "は",
           "katakana": "ハ",
-          "romaji": "ha"
+          "romaji": "ha",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ha.mp3"
         },
         {
           "id": "hi",
           "hiragana": "ひ",
           "katakana": "ヒ",
-          "romaji": "hi"
+          "romaji": "hi",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/hi.mp3"
         },
         {
           "id": "fu",
           "hiragana": "ふ",
           "katakana": "フ",
-          "romaji": "fu"
+          "romaji": "fu",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/hu.mp3"
         },
         {
           "id": "he",
           "hiragana": "へ",
           "katakana": "ヘ",
-          "romaji": "he"
+          "romaji": "he",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/he.mp3"
         },
         {
           "id": "ho",
           "hiragana": "ほ",
           "katakana": "ホ",
-          "romaji": "ho"
+          "romaji": "ho",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ho.mp3"
         }
       ],
       [
@@ -205,31 +230,36 @@
           "id": "ma",
           "hiragana": "ま",
           "katakana": "マ",
-          "romaji": "ma"
+          "romaji": "ma",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ma.mp3"
         },
         {
           "id": "mi",
           "hiragana": "み",
           "katakana": "ミ",
-          "romaji": "mi"
+          "romaji": "mi",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/mi.mp3"
         },
         {
           "id": "mu",
           "hiragana": "む",
           "katakana": "ム",
-          "romaji": "mu"
+          "romaji": "mu",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/mu.mp3"
         },
         {
           "id": "me",
           "hiragana": "め",
           "katakana": "メ",
-          "romaji": "me"
+          "romaji": "me",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/me.mp3"
         },
         {
           "id": "mo",
           "hiragana": "も",
           "katakana": "モ",
-          "romaji": "mo"
+          "romaji": "mo",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/mo.mp3"
         }
       ],
       [
@@ -237,21 +267,24 @@
           "id": "ya",
           "hiragana": "や",
           "katakana": "ヤ",
-          "romaji": "ya"
+          "romaji": "ya",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ya.mp3"
         },
         {},
         {
           "id": "yu",
           "hiragana": "ゆ",
           "katakana": "ユ",
-          "romaji": "yu"
+          "romaji": "yu",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/yu.mp3"
         },
         {},
         {
           "id": "yo",
           "hiragana": "よ",
           "katakana": "ヨ",
-          "romaji": "yo"
+          "romaji": "yo",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/yo.mp3"
         }
       ],
       [
@@ -259,31 +292,36 @@
           "id": "ra",
           "hiragana": "ら",
           "katakana": "ラ",
-          "romaji": "ra"
+          "romaji": "ra",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ra.mp3"
         },
         {
           "id": "ri",
           "hiragana": "り",
           "katakana": "リ",
-          "romaji": "ri"
+          "romaji": "ri",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ri.mp3"
         },
         {
           "id": "ru",
           "hiragana": "る",
           "katakana": "ル",
-          "romaji": "ru"
+          "romaji": "ru",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ru.mp3"
         },
         {
           "id": "re",
           "hiragana": "れ",
           "katakana": "レ",
-          "romaji": "re"
+          "romaji": "re",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/re.mp3"
         },
         {
           "id": "ro",
           "hiragana": "ろ",
           "katakana": "ロ",
-          "romaji": "ro"
+          "romaji": "ro",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ro.mp3"
         }
       ],
       [
@@ -291,7 +329,8 @@
           "id": "wa",
           "hiragana": "わ",
           "katakana": "ワ",
-          "romaji": "wa"
+          "romaji": "wa",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/wa.mp3"
         },
         {},
         {},
@@ -300,7 +339,8 @@
           "id": "wo",
           "hiragana": "を",
           "katakana": "ヲ",
-          "romaji": "wo"
+          "romaji": "wo",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/wo.mp3"
         }
       ]
     ]
@@ -314,31 +354,36 @@
           "id": "ga",
           "hiragana": "が",
           "katakana": "ガ",
-          "romaji": "ga"
+          "romaji": "ga",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ga.mp3"
         },
         {
           "id": "gi",
           "hiragana": "ぎ",
           "katakana": "ギ",
-          "romaji": "gi"
+          "romaji": "gi",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/gi.mp3"
         },
         {
           "id": "gu",
           "hiragana": "ぐ",
           "katakana": "グ",
-          "romaji": "gu"
+          "romaji": "gu",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/gu.mp3"
         },
         {
           "id": "ge",
           "hiragana": "げ",
           "katakana": "ゲ",
-          "romaji": "ge"
+          "romaji": "ge",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ge.mp3"
         },
         {
           "id": "go",
           "hiragana": "ご",
           "katakana": "ゴ",
-          "romaji": "go"
+          "romaji": "go",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/go.mp3"
         }
       ],
       [
@@ -346,31 +391,36 @@
           "id": "za",
           "hiragana": "ざ",
           "katakana": "ザ",
-          "romaji": "za"
+          "romaji": "za",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/za.mp3"
         },
         {
           "id": "ji",
           "hiragana": "じ",
           "katakana": "ジ",
-          "romaji": "ji"
+          "romaji": "ji",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ji.mp3"
         },
         {
           "id": "zu",
           "hiragana": "ず",
           "katakana": "ズ",
-          "romaji": "zu"
+          "romaji": "zu",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/zu.mp3"
         },
         {
           "id": "ze",
           "hiragana": "ぜ",
           "katakana": "ゼ",
-          "romaji": "ze"
+          "romaji": "ze",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ze.mp3"
         },
         {
           "id": "zo",
           "hiragana": "ぞ",
           "katakana": "ゾ",
-          "romaji": "zo"
+          "romaji": "zo",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/zo.mp3"
         }
       ],
       [
@@ -378,31 +428,36 @@
           "id": "da",
           "hiragana": "だ",
           "katakana": "ダ",
-          "romaji": "da"
+          "romaji": "da",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/da.mp3"
         },
         {
           "id": "ji",
           "hiragana": "ぢ",
           "katakana": "ヂ",
-          "romaji": "ji"
+          "romaji": "ji",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ji.mp3"
         },
         {
           "id": "dzu",
           "hiragana": "づ",
           "katakana": "ヅ",
-          "romaji": "zu"
+          "romaji": "zu",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/zu.mp3"
         },
         {
           "id": "de",
           "hiragana": "で",
           "katakana": "デ",
-          "romaji": "de"
+          "romaji": "de",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/de.mp3"
         },
         {
           "id": "do",
           "hiragana": "ど",
           "katakana": "ド",
-          "romaji": "do"
+          "romaji": "do",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/do.mp3"
         }
       ],
       [
@@ -410,31 +465,36 @@
           "id": "ba",
           "hiragana": "ば",
           "katakana": "バ",
-          "romaji": "ba"
+          "romaji": "ba",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ba.mp3"
         },
         {
           "id": "bi",
           "hiragana": "び",
           "katakana": "ビ",
-          "romaji": "bi"
+          "romaji": "bi",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/bi.mp3"
         },
         {
           "id": "bu",
           "hiragana": "ぶ",
           "katakana": "ブ",
-          "romaji": "bu"
+          "romaji": "bu",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/bu.mp3"
         },
         {
           "id": "be",
           "hiragana": "べ",
           "katakana": "ベ",
-          "romaji": "be"
+          "romaji": "be",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/be.mp3"
         },
         {
           "id": "bo",
           "hiragana": "ぼ",
           "katakana": "ボ",
-          "romaji": "bo"
+          "romaji": "bo",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/bo.mp3"
         }
       ],
       [
@@ -442,31 +502,36 @@
           "id": "pa",
           "hiragana": "ぱ",
           "katakana": "パ",
-          "romaji": "pa"
+          "romaji": "pa",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/pa.mp3"
         },
         {
           "id": "pi",
           "hiragana": "ぴ",
           "katakana": "ピ",
-          "romaji": "pi"
+          "romaji": "pi",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/pi.mp3"
         },
         {
           "id": "pu",
           "hiragana": "ぷ",
           "katakana": "プ",
-          "romaji": "pu"
+          "romaji": "pu",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/pu.mp3"
         },
         {
           "id": "pe",
           "hiragana": "ぺ",
           "katakana": "ペ",
-          "romaji": "pe"
+          "romaji": "pe",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/pe.mp3"
         },
         {
           "id": "po",
           "hiragana": "ぽ",
           "katakana": "ポ",
-          "romaji": "po"
+          "romaji": "po",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/po.mp3"
         }
       ]
     ]
@@ -480,19 +545,22 @@
           "id": "kya",
           "hiragana": "きゃ",
           "katakana": "キャ",
-          "romaji": "kya"
+          "romaji": "kya",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/kya.mp3"
         },
         {
           "id": "kyu",
           "hiragana": "きゅ",
           "katakana": "キュ",
-          "romaji": "kyu"
+          "romaji": "kyu",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/kyu.mp3"
         },
         {
           "id": "kyo",
           "hiragana": "きょ",
           "katakana": "キョ",
-          "romaji": "kyo"
+          "romaji": "kyo",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/kyo.mp3"
         }
       ],
       [
@@ -500,19 +568,22 @@
           "id": "gya",
           "hiragana": "ぎゃ",
           "katakana": "ギャ",
-          "romaji": "gya"
+          "romaji": "gya",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/gya.mp3"
         },
         {
           "id": "gyu",
           "hiragana": "ぎゅ",
           "katakana": "ギュ",
-          "romaji": "gyu"
+          "romaji": "gyu",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/gyu.mp3"
         },
         {
           "id": "gyo",
           "hiragana": "ぎょ",
           "katakana": "ギョ",
-          "romaji": "gyo"
+          "romaji": "gyo",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/gyo.mp3"
         }
       ],
       [
@@ -520,19 +591,22 @@
           "id": "sha",
           "hiragana": "しゃ",
           "katakana": "シャ",
-          "romaji": "sha"
+          "romaji": "sha",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/sha.mp3"
         },
         {
           "id": "shu",
           "hiragana": "しゅ",
           "katakana": "シュ",
-          "romaji": "shu"
+          "romaji": "shu",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/shu.mp3"
         },
         {
           "id": "sho",
           "hiragana": "しょ",
           "katakana": "ショ",
-          "romaji": "sho"
+          "romaji": "sho",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/sho.mp3"
         }
       ],
       [
@@ -540,19 +614,22 @@
           "id": "ja",
           "hiragana": "じゃ",
           "katakana": "ジャ",
-          "romaji": "ja"
+          "romaji": "ja",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ja.mp3"
         },
         {
           "id": "ju",
           "hiragana": "じゅ",
           "katakana": "ジュ",
-          "romaji": "ju"
+          "romaji": "ju",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ju.mp3"
         },
         {
           "id": "jo",
           "hiragana": "じょ",
           "katakana": "ジョ",
-          "romaji": "jo"
+          "romaji": "jo",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/jo.mp3"
         }
       ],
       [
@@ -560,19 +637,22 @@
           "id": "cha",
           "hiragana": "ちゃ",
           "katakana": "チャ",
-          "romaji": "cha"
+          "romaji": "cha",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/cha.mp3"
         },
         {
           "id": "chu",
           "hiragana": "ちゅ",
           "katakana": "チュ",
-          "romaji": "chu"
+          "romaji": "chu",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/chu.mp3"
         },
         {
           "id": "cho",
           "hiragana": "ちょ",
           "katakana": "チョ",
-          "romaji": "cho"
+          "romaji": "cho",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/cho.mp3"
         }
       ],
       [
@@ -580,19 +660,22 @@
           "id": "ja",
           "hiragana": "ぢゃ",
           "katakana": "ヂャ",
-          "romaji": "ja"
+          "romaji": "ja",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ja.mp3"
         },
         {
           "id": "ju",
           "hiragana": "ぢゅ",
           "katakana": "ヂュ",
-          "romaji": "ju"
+          "romaji": "ju",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ju.mp3"
         },
         {
           "id": "jo",
           "hiragana": "ぢょ",
           "katakana": "ヂュ",
-          "romaji": "jo"
+          "romaji": "jo",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/jo.mp3"
         }
       ],
       [
@@ -600,19 +683,22 @@
           "id": "nya",
           "hiragana": "にゃ",
           "katakana": "ニャ",
-          "romaji": "nya"
+          "romaji": "nya",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/nya.mp3"
         },
         {
           "id": "nyu",
           "hiragana": "にゅ",
           "katakana": "ニュ",
-          "romaji": "nyu"
+          "romaji": "nyu",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/nyu.mp3"
         },
         {
           "id": "nyo",
           "hiragana": "にょ",
           "katakana": "ニョ",
-          "romaji": "nyo"
+          "romaji": "nyo",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/nyo.mp3"
         }
       ],
       [
@@ -620,19 +706,22 @@
           "id": "hya",
           "hiragana": "ひゃ",
           "katakana": "ヒャ",
-          "romaji": "hya"
+          "romaji": "hya",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/hya.mp3"
         },
         {
           "id": "hyu",
           "hiragana": "ひゅ",
           "katakana": "ヒュ",
-          "romaji": "hyu"
+          "romaji": "hyu",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/hyu.mp3"
         },
         {
           "id": "hyo",
           "hiragana": "ひょ",
           "katakana": "ヒョ",
-          "romaji": "hyo"
+          "romaji": "hyo",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/hyo.mp3"
         }
       ],
       [
@@ -640,19 +729,22 @@
           "id": "bya",
           "hiragana": "びゃ",
           "katakana": "ビャ",
-          "romaji": "bya"
+          "romaji": "bya",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/bya.mp3"
         },
         {
           "id": "byu",
           "hiragana": "びゅ",
           "katakana": "ビュ",
-          "romaji": "byu"
+          "romaji": "byu",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/byu.mp3"
         },
         {
           "id": "byo",
           "hiragana": "びょ",
           "katakana": "ビョ",
-          "romaji": "byo"
+          "romaji": "byo",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/byo.mp3"
         }
       ],
       [
@@ -660,19 +752,22 @@
           "id": "pya",
           "hiragana": "ぴゃ",
           "katakana": "ピャ",
-          "romaji": "pya"
+          "romaji": "pya",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/pya.mp3"
         },
         {
           "id": "pyu",
           "hiragana": "ぴゅ",
           "katakana": "ピュ",
-          "romaji": "pyu"
+          "romaji": "pyu",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/pyu.mp3"
         },
         {
           "id": "pyo",
           "hiragana": "ぴょ",
           "katakana": "ピョ",
-          "romaji": "pyo"
+          "romaji": "pyo",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/pyo.mp3"
         }
       ],
       [
@@ -680,19 +775,22 @@
           "id": "mya",
           "hiragana": "みゃ",
           "katakana": "ミャ",
-          "romaji": "mya"
+          "romaji": "mya",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/mya.mp3"
         },
         {
           "id": "myu",
           "hiragana": "みゅ",
           "katakana": "ミュ",
-          "romaji": "myu"
+          "romaji": "myu",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/myu.mp3"
         },
         {
           "id": "myo",
           "hiragana": "みょ",
           "katakana": "ミョ",
-          "romaji": "myo"
+          "romaji": "myo",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/myo.mp3"
         }
       ],
       [
@@ -700,19 +798,22 @@
           "id": "rya",
           "hiragana": "りゃ",
           "katakana": "リャ",
-          "romaji": "rya"
+          "romaji": "rya",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/rya.mp3"
         },
         {
           "id": "ryu",
           "hiragana": "りゅ",
           "katakana": "リュ",
-          "romaji": "ryu"
+          "romaji": "ryu",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ryu.mp3"
         },
         {
           "id": "ryo",
           "hiragana": "りょ",
           "katakana": "リョ",
-          "romaji": "ryo"
+          "romaji": "ryo",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ryo.mp3"
         }
       ]
     ]

@@ -23,7 +23,6 @@ const KanaTablePage = (props) => {
 
     const [currentSection, setCurrentSection] = useState(null);
     const [isCardOpenedByUser, setCardOpenedByUser] = useState(() => {
-        console.log('SET isCardOpenedByUser', false)
         return false;
     });
 
@@ -47,7 +46,6 @@ const KanaTablePage = (props) => {
         }
     };
 
-    console.log('isCardOpenedByUser', isCardOpenedByUser)
 
     return (
         <div className={style.backdrop}>
