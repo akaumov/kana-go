@@ -8,31 +8,36 @@
           "id": "a",
           "hiragana": "あ",
           "katakana": "ア",
-          "romaji": "a"
+          "romaji": "a",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/aa.mp3"
         },
         {
           "id": "i",
           "hiragana": "い",
           "katakana": "イ",
-          "romaji": "i"
+          "romaji": "i",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ii.mp3"
         },
         {
           "id": "u",
           "hiragana": "う",
           "katakana": "ウ",
-          "romaji": "u"
+          "romaji": "u",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/uu.mp3"
         },
         {
           "id": "e",
           "hiragana": "え",
           "katakana": "エ",
-          "romaji": "e"
+          "romaji": "e",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/ee.mp3"
         },
         {
           "id": "o",
           "hiragana": "お",
           "katakana": "オ",
-          "romaji": "o"
+          "romaji": "o",
+          "sound": "https://www.nhk.or.jp/lesson/mp3/syllabary/oo.mp3"
         }
       ],
       [

@@ -38,7 +38,8 @@ const _getStartPosition = (windowSize, openedItem, isMobile) => {
 };
 
 
-function useAnimation(isOpened, characterId, onClosed) {
+function useAnimation(isOpened, characterId, onClosed, preventEnterAnimation) {
+
     const windowSize = useWindowSize();
     const openedItem = document.getElementById(`table-item-${characterId}`);
     const [showExtraInfo, setShowExtraInfo] = useState(isOpened);
@@ -83,6 +84,10 @@ function useAnimation(isOpened, characterId, onClosed) {
         },
     };
 
+    if (preventEnterAnimation) {
+        transitionConfig.from = transitionConfig.enter;
+    }
+
     const containerTransitions = useTransition(
         isOpened,
         null,
@@ -103,6 +108,10 @@ function useAnimation(isOpened, characterId, onClosed) {
             opacity: 0,
         },
     };
+
+    if (preventEnterAnimation) {
+        extraInfoTransitionConfig.from = extraInfoTransitionConfig.enter;
+    }
 
     const extraInfoTransitions = useTransition(
         showExtraInfo,

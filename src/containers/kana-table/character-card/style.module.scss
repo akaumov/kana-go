@@ -37,7 +37,6 @@ $desktop-dialog-height: 480px;
   composes: dialog;
   overflow: hidden;
   will-change: transform;
-  pointer-events: none;
 }
 
 .closeButton {

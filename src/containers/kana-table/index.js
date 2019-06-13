@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {withRouter} from "react-router-dom";
 
 import kanaData from '../../kana_data';
@@ -13,7 +13,6 @@ import {trace} from "../../utils";
 
 
 const KanaTablePage = (props) => {
-
     const {
         isOpenedFromHomePage,
         characterType,
@@ -23,12 +22,18 @@ const KanaTablePage = (props) => {
     } = props;
 
     const [currentSection, setCurrentSection] = useState(null);
+    const [isCardOpenedByUser, setCardOpenedByUser] = useState(() => {
+        console.log('SET isCardOpenedByUser', false)
+        return false;
+    });
 
     const _handleClickItem = (itemId) => {
+        setCardOpenedByUser(true);
         history.push(`/kana-table/${characterType}/${itemId}`);
     };
 
     const _handleCharacterCardClosed = () => {
+        setCardOpenedByUser(false);
         history.replace(`/kana-table/${characterType}`);
     };
 
@@ -41,6 +46,8 @@ const KanaTablePage = (props) => {
             setCurrentSection(kanaData[sectionIndex]);
         }
     };
+
+    console.log('isCardOpenedByUser', isCardOpenedByUser)
 
     return (
         <div className={style.backdrop}>
@@ -66,6 +73,7 @@ const KanaTablePage = (props) => {
                         openedCharacter &&
                         <CharacterCard
                             isOpened={!!openedCharacterId}
+                            animate={isCardOpenedByUser}
                             key={'character-card'}
                             characterType={characterType}
                             character={openedCharacter}
